@@ -25,15 +25,15 @@ const noMessages = [
 ];
 
 const photoPositions = [
-  { top: "5%", left: "6%", rotation: "-8deg" },
-  { top: "8%", right: "7%", rotation: "7deg" },
-  { top: "34%", left: "3%", rotation: "5deg" },
-  { top: "36%", right: "4%", rotation: "-6deg" },
-  { bottom: "7%", left: "7%", rotation: "8deg" },
-  { bottom: "6%", right: "8%", rotation: "-7deg" },
-  { top: "69%", left: "25%", rotation: "-4deg" },
-  { top: "68%", right: "24%", rotation: "5deg" },
-  { top: "2%", left: "42%", rotation: "3deg" }
+  { top: "3%", left: "3%", rotation: "-8deg" },
+  { top: "4%", right: "3%", rotation: "7deg" },
+  { top: "28%", left: "-2%", rotation: "5deg" },
+  { top: "30%", right: "-2%", rotation: "-6deg" },
+  { bottom: "4%", left: "3%", rotation: "8deg" },
+  { bottom: "4%", right: "3%", rotation: "-7deg" },
+  { bottom: "1%", left: "30%", rotation: "-4deg" },
+  { bottom: "1%", right: "30%", rotation: "5deg" },
+  { top: "1%", left: "42%", rotation: "3deg" }
 ];
 
 photos.forEach((photo, index) => {
