@@ -65,10 +65,11 @@ const photoPositions = [
   { top: "2%", left: "40%", rotation: "-3deg" },
   { top: "6%", right: "21%", rotation: "7deg" },
   { top: "2%", right: "3%", rotation: "-6deg" },
-  { bottom: "7%", left: "4%", rotation: "5deg" },
-  { bottom: "3%", left: "28%", rotation: "-7deg" },
-  { bottom: "7%", right: "28%", rotation: "4deg" },
-  { bottom: "3%", right: "4%", rotation: "-5deg" }
+
+  { bottom: "9%", left: "4%", rotation: "5deg" },
+  { bottom: "7%", left: "28%", rotation: "-7deg" },
+  { bottom: "9%", right: "28%", rotation: "4deg" },
+  { bottom: "7%", right: "4%", rotation: "-5deg" }
 ];
 
 photos.forEach((photo, index) => {
@@ -142,34 +143,48 @@ function moveNoButton() {
   if (now - lastMove < moveCooldown) return;
   lastMove = now;
 
+  noAttempts++;
+
   const stageRect = buttonStage.getBoundingClientRect();
-  const noRect = noBtn.getBoundingClientRect();
-  const yesRelative = getRelativeRect(yesBtn, buttonStage);
+
+  const yesWidth = yesBtn.offsetWidth;
+  const yesHeight = yesBtn.offsetHeight;
+  const noWidth = noBtn.offsetWidth;
+  const noHeight = noBtn.offsetHeight;
+
+  const yesLeft = stageRect.width * 0.08;
+  const yesTop = stageRect.height * 0.28;
+  const yesSafeZone = {
+    left: yesLeft - 18,
+    right: yesLeft + yesWidth + 46,
+    top: yesTop - 18,
+    bottom: yesTop + yesHeight + 36
+  };
 
   const padding = 8;
-  const maxX = stageRect.width - noRect.width - padding;
-  const maxY = stageRect.height - noRect.height - padding;
+  const minX = stageRect.width * 0.58;
+  const maxX = stageRect.width - noWidth - padding;
+  const minY = padding;
+  const maxY = stageRect.height - noHeight - padding;
 
   let x, y, candidate, tries = 0;
 
   do {
-    x = padding + Math.random() * Math.max(1, maxX - padding);
-    y = padding + Math.random() * Math.max(1, maxY - padding);
+    x = minX + Math.random() * Math.max(1, maxX - minX);
+    y = minY + Math.random() * Math.max(1, maxY - minY);
 
     candidate = {
       left: x,
-      right: x + noRect.width,
+      right: x + noWidth,
       top: y,
-      bottom: y + noRect.height
+      bottom: y + noHeight
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesRelative, 70) && tries < 100);
+  } while (rectsOverlap(candidate, yesSafeZone, 20) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
-
-  noAttempts++;
 
   const photoIndex = noAttempts - 1;
   if (photoIndex < photos.length) {
@@ -182,10 +197,10 @@ function moveNoButton() {
     mainHeading.textContent = "I think you already know the correct answer.";
   }
 
-  const noScale = Math.max(0.72, 1 - noAttempts * 0.035);
-  const yesScale = Math.min(1.22, 1 + noAttempts * 0.035);
+  const noScale = Math.max(0.78, 1 - noAttempts * 0.025);
+  const yesScale = Math.min(1.14, 1 + noAttempts * 0.02);
 
-  noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 10 - 5}deg)`;
+  noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 8 - 4}deg)`;
   yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
 
   updateExtras();
