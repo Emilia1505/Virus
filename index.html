@@ -27,7 +27,7 @@
   <main class="app">
     <section class="card" id="questionCard">
       <p class="eyebrow">Why are you Gay?</p>
-
+      
       <h1 id="mainHeading">Will you be my girlfriend?</h1>
 
       <p class="intro">
@@ -43,15 +43,18 @@
     </section>
 
     <section class="card success hidden" id="successCard">
-      <p class="eyebrow">Good choice</p>
+      <p class="eyebrow" id="successEyebrow">Application accepted</p>
 
-      <h1>Okay, perfect.</h1>
+     <h1 id="successHeading">Processing answer...</h1>
 
-      <p class="intro">
-        I’m really happy you said yes. :)</p>
-       <p class="final-line"> I’m your German girlfriend now.<br>
+      <p class="intro" id="successText">
+          Please wait.
+      </p>
+
+      <p class="final-line hidden" id="finalLine">
+        I’m your German girlfriend now.<br>
         No take-backsies. :P
-       </p>
+      </p>
 
       <button class="btn yes replay" id="restartBtn">Replay</button>
     </section>
