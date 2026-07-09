@@ -35,16 +35,17 @@ const noMessages = [
 
 const eyebrowTexts = [
   "Why are you Gay?",
-  "Okay, now you're just being difficult.",
+  "Really? :(",
   "Seriously?",
+  "AHHHHHHHHHHHHHHHHHHHHH",
   "I'm running out of messages."
 ];
 
 const yesTexts = [
   "Yes",
-  "Probably Yes",
-  "Definitely Yes",
-  "Just Press Me"
+  "Ja",
+  "Sí",
+  "Absolutely"
 ];
 
 const noTexts = [
@@ -52,7 +53,7 @@ const noTexts = [
   "Nope",
   "Nah",
   "Still no.",
-  "Why though?"
+  "No? :("
 ];
 
 const achievements = [
@@ -64,15 +65,15 @@ const achievements = [
 
 const photoPositions = [
   { top: "2%", left: "3%", rotation: "-8deg" },
-  { top: "6%", left: "22%", rotation: "6deg" },
-  { top: "2%", left: "41%", rotation: "-3deg" },
-  { top: "6%", right: "22%", rotation: "7deg" },
+  { top: "6%", left: "21%", rotation: "6deg" },
+  { top: "2%", left: "40%", rotation: "-3deg" },
+  { top: "6%", right: "21%", rotation: "7deg" },
   { top: "2%", right: "3%", rotation: "-6deg" },
 
-  { bottom: "11%", left: "5%", rotation: "5deg" },
-  { bottom: "8%", left: "30%", rotation: "-7deg" },
-  { bottom: "11%", right: "30%", rotation: "4deg" },
-  { bottom: "8%", right: "5%", rotation: "-5deg" }
+  { bottom: "16%", left: "4%", rotation: "5deg" },
+  { bottom: "13%", left: "28%", rotation: "-7deg" },
+  { bottom: "16%", right: "28%", rotation: "4deg" },
+  { bottom: "13%", right: "4%", rotation: "-5deg" }
 ];
 
 photos.forEach((photo, index) => {
