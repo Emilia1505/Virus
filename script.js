@@ -17,6 +17,7 @@ const finalLine = document.getElementById("finalLine");
 const successEyebrow = document.getElementById("successEyebrow");
 
 
+
 let noAttempts = 0;
 let lastMove = 0;
 const moveCooldown = 750;
