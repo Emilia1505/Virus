@@ -9,10 +9,13 @@ const mainHeading = document.getElementById("mainHeading");
 const photoBackground = document.getElementById("photoBackground");
 const confettiLayer = document.getElementById("confettiLayer");
 const photos = document.querySelectorAll(".bg-photo");
+const legoWalk = document.getElementById("legoWalk");
 
 const successHeading = document.getElementById("successHeading");
 const successText = document.getElementById("successText");
 const finalLine = document.getElementById("finalLine");
+const successEyebrow = document.getElementById("successEyebrow");
+
 
 let noAttempts = 0;
 let lastMove = 0;
@@ -61,15 +64,15 @@ const achievements = [
 
 const photoPositions = [
   { top: "2%", left: "3%", rotation: "-8deg" },
-  { top: "6%", left: "21%", rotation: "6deg" },
-  { top: "2%", left: "40%", rotation: "-3deg" },
-  { top: "6%", right: "21%", rotation: "7deg" },
+  { top: "6%", left: "22%", rotation: "6deg" },
+  { top: "2%", left: "41%", rotation: "-3deg" },
+  { top: "6%", right: "22%", rotation: "7deg" },
   { top: "2%", right: "3%", rotation: "-6deg" },
 
-  { bottom: "9%", left: "4%", rotation: "5deg" },
-  { bottom: "7%", left: "28%", rotation: "-7deg" },
-  { bottom: "9%", right: "28%", rotation: "4deg" },
-  { bottom: "7%", right: "4%", rotation: "-5deg" }
+  { bottom: "11%", left: "5%", rotation: "5deg" },
+  { bottom: "8%", left: "30%", rotation: "-7deg" },
+  { bottom: "11%", right: "30%", rotation: "4deg" },
+  { bottom: "8%", right: "5%", rotation: "-5deg" }
 ];
 
 photos.forEach((photo, index) => {
@@ -197,11 +200,12 @@ function moveNoButton() {
     mainHeading.textContent = "I think you already know the correct answer.";
   }
 
-  const noScale = Math.max(0.62, 1 - noAttempts * 0.045);
-  const yesScale = Math.min(1.08, 1 + noAttempts * 0.012);
-
+  const noScale = Math.max(0.58, 1 - noAttempts * 0.05);
+  const yesScale = Math.min(1.04, 1 + noAttempts * 0.005);
+  
   noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 10 - 5}deg)`;
   yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
+
 
   updateExtras();
 }
@@ -241,29 +245,40 @@ function showSuccessSequence() {
 
   restartBtn.style.display = "none";
   finalLine.classList.add("hidden");
+  legoWalk.classList.add("hidden");
 
-  successHeading.textContent = "Processing answer...";
+  successEyebrow.textContent = "System check";
+  successHeading.textContent = "Analysing response...";
   successText.textContent = "Please wait.";
 
   setTimeout(function () {
-    successHeading.textContent = "Double checking...";
+    successHeading.textContent = "Checking compatibility...";
     successText.textContent = "This is an important decision.";
   }, 700);
 
   setTimeout(function () {
-    successHeading.textContent = "Yep.";
-    successText.textContent = "That is the correct one.";
+    successHeading.textContent = "Searching for reasons to say no...";
+    successText.textContent = "Scanning...";
   }, 1500);
 
   setTimeout(function () {
-    successHeading.textContent = "Application accepted.";
+    successHeading.textContent = "None found.";
+    successText.textContent = "That is the correct answer.";
+  }, 2300);
+
+  setTimeout(function () {
+    successEyebrow.textContent = "Mission complete";
+    successHeading.textContent = "Congratulations!";
     successText.innerHTML =
-      "No attempts: " + noAttempts + "<br>I'll pretend I didn't see that.";
+      "You have successfully unlocked:<br><strong>One German girlfriend</strong><br><br>No attempts: " +
+      noAttempts +
+      "<br>I'll pretend I didn't see that.";
 
     finalLine.classList.remove("hidden");
+    legoWalk.classList.remove("hidden");
     restartBtn.style.display = "inline-block";
     launchConfetti();
-  }, 2300);
+  }, 3100);
 }
 
 document.addEventListener("mousemove", (event) => {
@@ -290,6 +305,9 @@ yesBtn.addEventListener("click", showSuccessSequence);
 restartBtn.addEventListener("click", () => {
   noAttempts = 0;
   lastMove = 0;
+
+  legoWalk.classList.add("hidden");
+  successEyebrow.textContent = "Mission complete";
 
   successCard.classList.add("hidden");
   questionCard.classList.remove("hidden");
