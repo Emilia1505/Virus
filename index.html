@@ -2,43 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>One Important Question</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Question</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="background-glow"></div>
-  <div class="hearts" id="hearts"></div>
-
-  <main class="app" id="app">
+  <main class="app">
     <section class="card" id="questionCard">
-      <p class="eyebrow">I have one very important question...</p>
+      <div class="small-label">I have a question</div>
+
       <h1 id="mainQuestion">Will you be my girlfriend?</h1>
-      <p class="subtitle" id="subtitle">
-        Choose wisely. One answer is clearly superior.
+
+      <p class="intro">
+        No pressure. Except the button mechanics may disagree.
       </p>
 
-      <div class="button-zone" id="buttonZone">
-        <button class="yes-button" id="yesButton">Yes 💕</button>
-        <button class="no-button" id="noButton">No</button>
+      <div class="photo-strip">
+        <img src="images/photo1.jpg" alt="Photo 1" />
+        <img src="images/photo2.jpg" alt="Photo 2" />
+        <img src="images/photo3.jpg" alt="Photo 3" />
       </div>
 
-      <p class="hint" id="hint">The “No” button is emotionally unavailable.</p>
+      <div class="progress-area">
+        <div class="progress-label" id="progressLabel">
+          Current likelihood of saying yes: 72%
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="button-zone" id="buttonZone">
+        <button class="btn yes" id="yesBtn">Yes</button>
+        <button class="btn no" id="noBtn">No</button>
+      </div>
+
+      <p class="hint" id="hintText">Choose wisely.</p>
     </section>
 
-    <section class="celebration hidden" id="celebration">
-      <div class="celebration-card">
-        <div class="big-heart">❤️</div>
-        <h2 id="yesTitle">YAY!!!</h2>
-        <p id="yesMessage">
-          You just made me incredibly happy. I cannot wait for all the little adventures, stupid jokes, deep talks, and memories ahead.
-        </p>
-        <button class="restart-button" id="restartButton">Replay</button>
+    <section class="card success hidden" id="successCard">
+      <div class="small-label">Excellent choice</div>
+      <h1>Okay, perfect.</h1>
+      <p>
+        I’m really happy you said yes. I’m excited for everything we get to do together.
+      </p>
+
+      <div class="success-actions">
+        <button class="btn yes" id="restartBtn">Replay</button>
       </div>
     </section>
   </main>
 
-  <canvas id="confettiCanvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
