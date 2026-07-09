@@ -82,8 +82,8 @@ body {
 }
 
 .card {
-  width: min(340px, 92vw);
-  padding: 34px 24px 28px;
+  width: min(315px, 88vw);
+  padding: 28px 20px 22px;
   border-radius: 32px;
   background: rgba(255,255,255,.98);
   backdrop-filter: blur(14px);
@@ -105,7 +105,7 @@ body {
 }
 
 h1 {
-  font-size: clamp(2rem,8vw,3rem);
+  font-size: clamp(1.8rem, 7vw, 2.7rem);
   line-height: 1.05;
 }
 
@@ -149,10 +149,29 @@ h1 {
 
 .button-stage {
   position: relative;
-  height: 105px;
+  height: 95px;
   overflow: hidden;
 }
 
+.lego-walk {
+  font-size: 2rem;
+  margin: 10px 0;
+  animation: legoWalk 3s ease-in-out forwards;
+}
+
+@keyframes legoWalk {
+  from {
+    transform: translateX(-120px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120px);
+    opacity: 0;
+  }
+}
 .btn {
   position: absolute;
   border: none;
@@ -216,7 +235,7 @@ h1 {
 
 
   .card {
-    width: min(330px, 92vw);
+    width: min(315px, 88vw);
   }
 }
 
