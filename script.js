@@ -8,11 +8,11 @@ const restartBtn = document.getElementById("restartBtn");
 
 /* EDIT YOUR 9 MESSAGES HERE */
 const noMessages = [
-  "Nice try.",
-  "Hmm. That button is not very cooperative.",
-  "Interesting decision.",
+  "That button has commitment issues.",
+  "That button seems suspiciously slippery.",
+  "Interesting choice. Try again.",
   "The No button has chosen self-preservation.",
-  "That was close.",
+  "The No button has trust issues.",
   "I admire the effort.",
   "The website respectfully disagrees.",
   "Statistically, Yes is looking stronger.",
