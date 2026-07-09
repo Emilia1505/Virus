@@ -164,7 +164,7 @@ function moveNoButton() {
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesRelative, 32) && tries < 100);
+  } while (rectsOverlap(candidate, yesRelative, 70) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
@@ -183,7 +183,7 @@ function moveNoButton() {
   }
 
   const noScale = Math.max(0.72, 1 - noAttempts * 0.035);
-  const yesScale = Math.min(1.48, 1 + noAttempts * 0.055);
+  const yesScale = Math.min(1.22, 1 + noAttempts * 0.035);
 
   noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 10 - 5}deg)`;
   yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
