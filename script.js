@@ -10,6 +10,10 @@ const photoBackground = document.getElementById("photoBackground");
 const confettiLayer = document.getElementById("confettiLayer");
 const photos = document.querySelectorAll(".bg-photo");
 
+const successHeading = document.getElementById("successHeading");
+const successText = document.getElementById("successText");
+const finalLine = document.getElementById("finalLine");
+
 let noAttempts = 0;
 let lastMove = 0;
 const moveCooldown = 750;
@@ -26,18 +30,47 @@ const noMessages = [
   "At this point, just press Yes."
 ];
 
+const eyebrowTexts = [
+  "Why are you Gay?",
+  "Okay, now you're just being difficult.",
+  "Seriously?",
+  "I'm running out of messages."
+];
+
+const yesTexts = [
+  "Yes",
+  "Probably Yes",
+  "Definitely Yes",
+  "Just Press Me"
+];
+
+const noTexts = [
+  "No",
+  "Nope",
+  "Nah",
+  "Still no.",
+  "Why though?"
+];
+
+const achievements = [
+  "Achievement unlocked: Persistent.",
+  "Achievement unlocked: Still trying.",
+  "Achievement unlocked: Bold strategy.",
+  "Achievement unlocked: Acceptance pending."
+];
+
 const photoPositions = [
   { top: "2%", left: "3%", rotation: "-8deg" },
   { top: "6%", left: "21%", rotation: "6deg" },
   { top: "2%", left: "40%", rotation: "-3deg" },
   { top: "6%", right: "21%", rotation: "7deg" },
   { top: "2%", right: "3%", rotation: "-6deg" },
-
   { bottom: "7%", left: "4%", rotation: "5deg" },
   { bottom: "3%", left: "28%", rotation: "-7deg" },
   { bottom: "7%", right: "28%", rotation: "4deg" },
   { bottom: "3%", right: "4%", rotation: "-5deg" }
 ];
+
 photos.forEach((photo, index) => {
   const position = photoPositions[index];
   if (!position) return;
@@ -45,6 +78,15 @@ photos.forEach((photo, index) => {
   Object.assign(photo.style, position);
   photo.style.setProperty("--rotation", position.rotation);
 });
+
+const score = document.createElement("p");
+score.className = "score";
+score.textContent = "No attempts: 0";
+questionCard.appendChild(score);
+
+const achievement = document.createElement("p");
+achievement.className = "achievement";
+questionCard.appendChild(achievement);
 
 function rectsOverlap(a, b, padding = 28) {
   return !(
@@ -69,9 +111,34 @@ function getRelativeRect(element, parent) {
   };
 }
 
+function updateExtras() {
+  score.textContent = `No attempts: ${noAttempts}`;
+
+  if (noAttempts >= 3) {
+    document.querySelector(".eyebrow").textContent = eyebrowTexts[1];
+  }
+
+  if (noAttempts >= 6) {
+    document.querySelector(".eyebrow").textContent = eyebrowTexts[2];
+  }
+
+  if (noAttempts >= 8) {
+    document.querySelector(".eyebrow").textContent = eyebrowTexts[3];
+  }
+
+  if (noAttempts >= 3) yesBtn.textContent = yesTexts[1];
+  if (noAttempts >= 5) yesBtn.textContent = yesTexts[2];
+  if (noAttempts >= 8) yesBtn.textContent = yesTexts[3];
+
+  noBtn.textContent = noTexts[Math.min(noAttempts, noTexts.length - 1)];
+
+  if ([2, 4, 6, 8].includes(noAttempts)) {
+    achievement.textContent = achievements[Math.min(noAttempts / 2 - 1, achievements.length - 1)];
+  }
+}
+
 function moveNoButton() {
   const now = Date.now();
-
   if (now - lastMove < moveCooldown) return;
   lastMove = now;
 
@@ -83,10 +150,7 @@ function moveNoButton() {
   const maxX = stageRect.width - noRect.width - padding;
   const maxY = stageRect.height - noRect.height - padding;
 
-  let x;
-  let y;
-  let candidate;
-  let tries = 0;
+  let x, y, candidate, tries = 0;
 
   do {
     x = padding + Math.random() * Math.max(1, maxX - padding);
@@ -108,9 +172,8 @@ function moveNoButton() {
   noAttempts++;
 
   const photoIndex = noAttempts - 1;
-
   if (photoIndex < photos.length) {
-    photos[photoIndex].classList.add("show");
+    photos[photoIndex].classList.add("show", "photo-pop");
   }
 
   hintText.textContent = noMessages[Math.min(noAttempts - 1, noMessages.length - 1)];
@@ -122,8 +185,10 @@ function moveNoButton() {
   const noScale = Math.max(0.72, 1 - noAttempts * 0.035);
   const yesScale = Math.min(1.48, 1 + noAttempts * 0.055);
 
-  noBtn.style.transform = `scale(${noScale})`;
+  noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 10 - 5}deg)`;
   yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
+
+  updateExtras();
 }
 
 function isNearNoButton(x, y) {
@@ -141,7 +206,7 @@ function isNearNoButton(x, y) {
 function launchConfetti() {
   const emojis = ["🎉", "✨", "💙", "🥳", "🎊"];
 
-  for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 50; i++) {
     const piece = document.createElement("span");
     piece.className = "confetti";
     piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -150,34 +215,52 @@ function launchConfetti() {
     piece.style.fontSize = `${18 + Math.random() * 18}px`;
     confettiLayer.appendChild(piece);
 
-    setTimeout(() => {
-      piece.remove();
-    }, 2400);
+    setTimeout(() => piece.remove(), 2400);
   }
 }
 
+function showSuccessSequence() {
+  questionCard.classList.add("hidden");
+  photoBackground.classList.add("hide-photos");
+  successCard.classList.remove("hidden");
+
+  restartBtn.style.display = "none";
+  finalLine.classList.add("hidden");
+
+  successHeading.textContent = "Processing answer...";
+  successText.textContent = "Please wait.";
+
+  setTimeout(() => {
+    successHeading.textContent = "Double checking...";
+    successText.textContent = "This is an important decision.";
+  }, 700);
+
+  setTimeout(() => {
+    successHeading.textContent = "Yep.";
+    successText.textContent = "That is the correct one.";
+  }, 1500);
+
+  setTimeout(() => {
+    successHeading.textContent = "Application accepted.";
+    successText.innerHTML = `No attempts: ${noAttempts}<br>I'll pretend I didn't see that.`;
+    finalLine.classList.remove("hidden");
+    restartBtn.style.display = "inline-block";
+    launchConfetti();
+  }, 2300);
+}
+
 document.addEventListener("mousemove", (event) => {
-  if (isNearNoButton(event.clientX, event.clientY)) {
-    moveNoButton();
-  }
+  if (isNearNoButton(event.clientX, event.clientY)) moveNoButton();
 });
 
 document.addEventListener("touchstart", (event) => {
   const touch = event.touches[0];
-  if (!touch) return;
-
-  if (isNearNoButton(touch.clientX, touch.clientY)) {
-    moveNoButton();
-  }
+  if (touch && isNearNoButton(touch.clientX, touch.clientY)) moveNoButton();
 }, { passive: true });
 
 document.addEventListener("touchmove", (event) => {
   const touch = event.touches[0];
-  if (!touch) return;
-
-  if (isNearNoButton(touch.clientX, touch.clientY)) {
-    moveNoButton();
-  }
+  if (touch && isNearNoButton(touch.clientX, touch.clientY)) moveNoButton();
 }, { passive: true });
 
 noBtn.addEventListener("click", (event) => {
@@ -185,12 +268,7 @@ noBtn.addEventListener("click", (event) => {
   moveNoButton();
 });
 
-yesBtn.addEventListener("click", () => {
-  questionCard.classList.add("hidden");
-  photoBackground.classList.add("hide-photos");
-  successCard.classList.remove("hidden");
-  launchConfetti();
-});
+yesBtn.addEventListener("click", showSuccessSequence);
 
 restartBtn.addEventListener("click", () => {
   noAttempts = 0;
@@ -202,9 +280,16 @@ restartBtn.addEventListener("click", () => {
 
   hintText.textContent = "Go on. Try the No button.";
   mainHeading.textContent = "Will you be my girlfriend?";
+  document.querySelector(".eyebrow").textContent = "Why are you Gay?";
+
+  score.textContent = "No attempts: 0";
+  achievement.textContent = "";
+
+  yesBtn.textContent = "Yes";
+  noBtn.textContent = "No";
 
   photos.forEach((photo) => {
-    photo.classList.remove("show");
+    photo.classList.remove("show", "photo-pop");
   });
 
   yesBtn.style.left = "28%";
