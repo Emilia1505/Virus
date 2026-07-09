@@ -5,26 +5,26 @@ const hintText = document.getElementById("hintText");
 const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
-let lastMove = 0;
-const moveCooldown = 500;
+const mainHeading = document.getElementById("mainHeading");
 const photos = document.querySelectorAll(".photo-grid img");
 
-/* EDIT YOUR 9 MESSAGES HERE */
+let noAttempts = 0;
+let lastMove = 0;
+const moveCooldown = 500;
+
 const noMessages = [
   "That button has commitment issues.",
+  "Interesting choice. Try again.",  
   "That button seems suspiciously slippery.",
-  "Interesting choice. Try again.",
   "The No button has chosen self-preservation.",
-  "The No button has trust issues.",
   "I admire the effort.",
   "The website respectfully disagrees.",
+  "The No button has trust issues.",
   "Statistically, Yes is looking stronger.",
   "At this point, just press Yes."
 ];
 
-let noAttempts = 0;
-
-function rectsOverlap(a, b, padding = 14) {
+function rectsOverlap(a, b, padding = 18) {
   return !(
     a.right + padding < b.left ||
     a.left - padding > b.right ||
@@ -49,8 +49,11 @@ function getRelativeRect(element, parent) {
 
 function moveNoButton() {
   const now = Date.now();
+
   if (now - lastMove < moveCooldown) return;
+
   lastMove = now;
+
   const stageRect = buttonStage.getBoundingClientRect();
   const noRect = noBtn.getBoundingClientRect();
   const yesRelative = getRelativeRect(yesBtn, buttonStage);
@@ -63,9 +66,7 @@ function moveNoButton() {
   let y;
   let candidate;
   let tries = 0;
-  if(noAttempts <= photos.length){
-    photos[noAttempts-1].classList.add("show");
-  }
+
   do {
     x = padding + Math.random() * Math.max(1, maxX - padding);
     y = padding + Math.random() * Math.max(1, maxY - padding);
@@ -78,20 +79,28 @@ function moveNoButton() {
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesRelative, 20) && tries < 80);
+  } while (rectsOverlap(candidate, yesRelative, 24) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
-  noBtn.style.transform = "none";
 
   noAttempts++;
+
+  const photoIndex = noAttempts - 1;
+
+  if (photoIndex < photos.length) {
+    photos[photoIndex].classList.add("show");
+  }
 
   const messageIndex = Math.min(noAttempts - 1, noMessages.length - 1);
   hintText.textContent = noMessages[messageIndex];
 
+  if (noAttempts >= 5) {
+    mainHeading.textContent = "I think you already know the correct answer.";
+  }
+
   const noScale = Math.max(0.74, 1 - noAttempts * 0.035);
   const yesScale = Math.min(1.45, 1 + noAttempts * 0.05);
-  yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
 
   noBtn.style.transform = `scale(${noScale})`;
   yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
@@ -99,7 +108,7 @@ function moveNoButton() {
 
 function isNearNoButton(x, y) {
   const rect = noBtn.getBoundingClientRect();
-  const buffer = 70;
+  const buffer = 55;
 
   return (
     x > rect.left - buffer &&
@@ -109,14 +118,12 @@ function isNearNoButton(x, y) {
   );
 }
 
-/* Desktop Chrome */
 document.addEventListener("mousemove", (event) => {
   if (isNearNoButton(event.clientX, event.clientY)) {
     moveNoButton();
   }
 });
 
-/* Mobile */
 document.addEventListener("touchstart", (event) => {
   const touch = event.touches[0];
   if (!touch) return;
@@ -147,11 +154,17 @@ yesBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   noAttempts = 0;
+  lastMove = 0;
 
   successCard.classList.add("hidden");
   questionCard.classList.remove("hidden");
 
   hintText.textContent = "Take your time.";
+  mainHeading.textContent = "Will you be my girlfriend?";
+
+  photos.forEach((photo) => {
+    photo.classList.remove("show");
+  });
 
   yesBtn.style.left = "26%";
   yesBtn.style.top = "55%";
