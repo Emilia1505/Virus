@@ -6,6 +6,7 @@ const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
 const mainHeading = document.getElementById("mainHeading");
+const photoBackground = document.getElementById("photoBackground");
 const photos = document.querySelectorAll(".bg-photo");
 
 let noAttempts = 0;
@@ -14,38 +15,37 @@ const moveCooldown = 650;
 
 const noMessages = [
   "That button has commitment issues.",
-  "Interesting choice. Try again.",  
   "That button seems suspiciously slippery.",
+  "Interesting choice. Try again.",
   "The No button has chosen self-preservation.",
+  "The No button has trust issues.",
   "I admire the effort.",
   "The website respectfully disagrees.",
-  "The No button has trust issues.",
   "Statistically, Yes is looking stronger.",
   "At this point, just press Yes."
 ];
 
 const photoPositions = [
   { top: "3%", left: "3%", rotation: "-8deg" },
-  { top: "4%", right: "3%", rotation: "7deg" },
-  { top: "28%", left: "-2%", rotation: "5deg" },
-  { top: "30%", right: "-2%", rotation: "-6deg" },
-  { bottom: "4%", left: "3%", rotation: "8deg" },
-  { bottom: "4%", right: "3%", rotation: "-7deg" },
-  { bottom: "1%", left: "30%", rotation: "-4deg" },
-  { bottom: "1%", right: "30%", rotation: "5deg" },
-  { top: "1%", left: "42%", rotation: "3deg" }
+  { top: "3%", right: "3%", rotation: "7deg" },
+  { top: "24%", left: "-4%", rotation: "5deg" },
+  { top: "24%", right: "-4%", rotation: "-6deg" },
+  { bottom: "24%", left: "-4%", rotation: "8deg" },
+  { bottom: "24%", right: "-4%", rotation: "-7deg" },
+  { bottom: "3%", left: "5%", rotation: "-4deg" },
+  { bottom: "3%", right: "5%", rotation: "5deg" },
+  { top: "3%", left: "42%", rotation: "3deg" }
 ];
 
 photos.forEach((photo, index) => {
   const position = photoPositions[index];
-
   if (!position) return;
 
   Object.assign(photo.style, position);
   photo.style.setProperty("--rotation", position.rotation);
 });
 
-function rectsOverlap(a, b, padding = 18) {
+function rectsOverlap(a, b, padding = 24) {
   return !(
     a.right + padding < b.left ||
     a.left - padding > b.right ||
@@ -72,7 +72,6 @@ function moveNoButton() {
   const now = Date.now();
 
   if (now - lastMove < moveCooldown) return;
-
   lastMove = now;
 
   const stageRect = buttonStage.getBoundingClientRect();
@@ -100,7 +99,7 @@ function moveNoButton() {
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesRelative, 24) && tries < 100);
+  } while (rectsOverlap(candidate, yesRelative, 28) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
@@ -170,6 +169,7 @@ noBtn.addEventListener("click", (event) => {
 
 yesBtn.addEventListener("click", () => {
   questionCard.classList.add("hidden");
+  photoBackground.classList.add("hidden");
   successCard.classList.remove("hidden");
 });
 
@@ -179,6 +179,7 @@ restartBtn.addEventListener("click", () => {
 
   successCard.classList.add("hidden");
   questionCard.classList.remove("hidden");
+  photoBackground.classList.remove("hidden");
 
   hintText.textContent = "Take your time.";
   mainHeading.textContent = "Will you be my girlfriend?";
@@ -187,11 +188,11 @@ restartBtn.addEventListener("click", () => {
     photo.classList.remove("show");
   });
 
-  yesBtn.style.left = "26%";
-  yesBtn.style.top = "55%";
+  yesBtn.style.left = "28%";
+  yesBtn.style.top = "50%";
   yesBtn.style.transform = "translate(-50%, -50%)";
 
-  noBtn.style.left = "68%";
-  noBtn.style.top = "55%";
+  noBtn.style.left = "72%";
+  noBtn.style.top = "50%";
   noBtn.style.transform = "translate(-50%, -50%)";
 });
