@@ -230,19 +230,21 @@ function showSuccessSequence() {
   successHeading.textContent = "Processing answer...";
   successText.textContent = "Please wait.";
 
-  setTimeout(() => {
+  setTimeout(function () {
     successHeading.textContent = "Double checking...";
     successText.textContent = "This is an important decision.";
   }, 700);
 
-  setTimeout(() => {
+  setTimeout(function () {
     successHeading.textContent = "Yep.";
     successText.textContent = "That is the correct one.";
   }, 1500);
 
-  setTimeout(() => {
+  setTimeout(function () {
     successHeading.textContent = "Application accepted.";
-    successText.innerHTML = `No attempts: ${noAttempts}<br>I'll pretend I didn't see that.`;
+    successText.innerHTML =
+      "No attempts: " + noAttempts + "<br>I'll pretend I didn't see that.";
+
     finalLine.classList.remove("hidden");
     restartBtn.style.display = "inline-block";
     launchConfetti();
