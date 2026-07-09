@@ -27,6 +27,7 @@ body {
 #photoBackground {
   position: fixed;
   inset: 0;
+  height: 100dvh;
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
