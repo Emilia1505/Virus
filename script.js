@@ -7,11 +7,12 @@ const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
 const mainHeading = document.getElementById("mainHeading");
 const photoBackground = document.getElementById("photoBackground");
+const confettiLayer = document.getElementById("confettiLayer");
 const photos = document.querySelectorAll(".bg-photo");
 
 let noAttempts = 0;
 let lastMove = 0;
-const moveCooldown = 650;
+const moveCooldown = 750;
 
 const noMessages = [
   "That button has commitment issues.",
@@ -26,15 +27,15 @@ const noMessages = [
 ];
 
 const photoPositions = [
-  { top: "3%", left: "3%", rotation: "-8deg" },
-  { top: "3%", right: "3%", rotation: "7deg" },
-  { top: "24%", left: "-4%", rotation: "5deg" },
-  { top: "24%", right: "-4%", rotation: "-6deg" },
-  { bottom: "24%", left: "-4%", rotation: "8deg" },
-  { bottom: "24%", right: "-4%", rotation: "-7deg" },
-  { bottom: "3%", left: "5%", rotation: "-4deg" },
-  { bottom: "3%", right: "5%", rotation: "5deg" },
-  { top: "3%", left: "42%", rotation: "3deg" }
+  { top: "2%", left: "2%", rotation: "-8deg" },
+  { top: "2%", right: "2%", rotation: "7deg" },
+  { top: "20%", left: "-18px", rotation: "5deg" },
+  { top: "20%", right: "-18px", rotation: "-6deg" },
+  { bottom: "22%", left: "-18px", rotation: "8deg" },
+  { bottom: "22%", right: "-18px", rotation: "-7deg" },
+  { bottom: "2%", left: "4%", rotation: "-4deg" },
+  { bottom: "2%", right: "4%", rotation: "5deg" },
+  { top: "2%", left: "50%", rotation: "3deg", transform: "translateX(-50%)" }
 ];
 
 photos.forEach((photo, index) => {
@@ -45,7 +46,7 @@ photos.forEach((photo, index) => {
   photo.style.setProperty("--rotation", position.rotation);
 });
 
-function rectsOverlap(a, b, padding = 24) {
+function rectsOverlap(a, b, padding = 28) {
   return !(
     a.right + padding < b.left ||
     a.left - padding > b.right ||
@@ -99,7 +100,7 @@ function moveNoButton() {
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesRelative, 28) && tries < 100);
+  } while (rectsOverlap(candidate, yesRelative, 32) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
@@ -112,23 +113,22 @@ function moveNoButton() {
     photos[photoIndex].classList.add("show");
   }
 
-  const messageIndex = Math.min(noAttempts - 1, noMessages.length - 1);
-  hintText.textContent = noMessages[messageIndex];
+  hintText.textContent = noMessages[Math.min(noAttempts - 1, noMessages.length - 1)];
 
   if (noAttempts >= 5) {
     mainHeading.textContent = "I think you already know the correct answer.";
   }
 
-  const noScale = Math.max(0.74, 1 - noAttempts * 0.035);
-  const yesScale = Math.min(1.45, 1 + noAttempts * 0.05);
+  const noScale = Math.max(0.72, 1 - noAttempts * 0.035);
+  const yesScale = Math.min(1.48, 1 + noAttempts * 0.055);
 
   noBtn.style.transform = `scale(${noScale})`;
-  yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
+  yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
 }
 
 function isNearNoButton(x, y) {
   const rect = noBtn.getBoundingClientRect();
-  const buffer = 55;
+  const buffer = 48;
 
   return (
     x > rect.left - buffer &&
@@ -136,6 +136,24 @@ function isNearNoButton(x, y) {
     y > rect.top - buffer &&
     y < rect.bottom + buffer
   );
+}
+
+function launchConfetti() {
+  const emojis = ["🎉", "✨", "💙", "🥳", "🎊"];
+
+  for (let i = 0; i < 45; i++) {
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.animationDelay = `${Math.random() * 0.4}s`;
+    piece.style.fontSize = `${18 + Math.random() * 18}px`;
+    confettiLayer.appendChild(piece);
+
+    setTimeout(() => {
+      piece.remove();
+    }, 2400);
+  }
 }
 
 document.addEventListener("mousemove", (event) => {
@@ -169,8 +187,9 @@ noBtn.addEventListener("click", (event) => {
 
 yesBtn.addEventListener("click", () => {
   questionCard.classList.add("hidden");
-  photoBackground.classList.add("hidden");
+  photoBackground.classList.add("hide-photos");
   successCard.classList.remove("hidden");
+  launchConfetti();
 });
 
 restartBtn.addEventListener("click", () => {
@@ -179,9 +198,9 @@ restartBtn.addEventListener("click", () => {
 
   successCard.classList.add("hidden");
   questionCard.classList.remove("hidden");
-  photoBackground.classList.remove("hidden");
+  photoBackground.classList.remove("hide-photos");
 
-  hintText.textContent = "Take your time.";
+  hintText.textContent = "Go on. Try the No button.";
   mainHeading.textContent = "Will you be my girlfriend?";
 
   photos.forEach((photo) => {
@@ -190,9 +209,9 @@ restartBtn.addEventListener("click", () => {
 
   yesBtn.style.left = "28%";
   yesBtn.style.top = "50%";
-  yesBtn.style.transform = "translate(-50%, -50%)";
+  yesBtn.style.transform = "translate(-50%,-50%)";
 
   noBtn.style.left = "72%";
   noBtn.style.top = "50%";
-  noBtn.style.transform = "translate(-50%, -50%)";
+  noBtn.style.transform = "translate(-50%,-50%)";
 });
