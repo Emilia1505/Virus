@@ -208,6 +208,16 @@ function moveNoButton() {
 
 
   updateExtras();
+
+  if(noAttempts >= 9){
+
+    yesBtn.style.animation = "pulse .8s";
+
+    setTimeout(()=>{
+        yesBtn.style.animation = "";
+    },800);
+
+}
 }
 
 function isNearNoButton(x, y) {
@@ -295,9 +305,33 @@ document.addEventListener("touchmove", (event) => {
   if (touch && isNearNoButton(touch.clientX, touch.clientY)) moveNoButton();
 }, { passive: true });
 
-noBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  moveNoButton();
+noBtn.addEventListener("click",(event)=>{
+
+    event.preventDefault();
+
+    if(noAttempts >= 15){
+
+        hintText.textContent = "Seriously?!";
+
+        noBtn.style.opacity = "0";
+
+        noBtn.style.pointerEvents = "none";
+
+        setTimeout(()=>{
+
+            moveNoButton();
+
+            noBtn.style.opacity = "1";
+            noBtn.style.pointerEvents = "auto";
+
+        },350);
+
+        return;
+
+    }
+
+    moveNoButton();
+
 });
 
 yesBtn.addEventListener("click", showSuccessSequence);
