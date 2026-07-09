@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>One Important Question</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-glow"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="app" id="app">
+    <section class="card" id="questionCard">
+      <p class="eyebrow">I have one very important question...</p>
+      <h1 id="mainQuestion">Will you be my girlfriend?</h1>
+      <p class="subtitle" id="subtitle">
+        Choose wisely. One answer is clearly superior.
+      </p>
+
+      <div class="button-zone" id="buttonZone">
+        <button class="yes-button" id="yesButton">Yes 💕</button>
+        <button class="no-button" id="noButton">No</button>
+      </div>
+
+      <p class="hint" id="hint">The “No” button is emotionally unavailable.</p>
+    </section>
+
+    <section class="celebration hidden" id="celebration">
+      <div class="celebration-card">
+        <div class="big-heart">❤️</div>
+        <h2 id="yesTitle">YAY!!!</h2>
+        <p id="yesMessage">
+          You just made me incredibly happy. I cannot wait for all the little adventures, stupid jokes, deep talks, and memories ahead.
+        </p>
+        <button class="restart-button" id="restartButton">Replay</button>
+      </div>
+    </section>
+  </main>
+
+  <canvas id="confettiCanvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
