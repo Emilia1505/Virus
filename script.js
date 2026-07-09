@@ -20,12 +20,12 @@ const moveCooldown = 750;
 
 const noMessages = [
   "That button has commitment issues.",
-  "That button seems suspiciously slippery.",
   "Interesting choice. Try again.",
-  "The No button has chosen self-preservation.",
-  "The No button has trust issues.",
+  "That button seems suspiciously slippery.",
+  "Oiiiii!!!!!!!",
   "I admire the effort.",
   "The website respectfully disagrees.",
+  "The No button has trust issues.",
   "Statistically, Yes is looking stronger.",
   "At this point, just press Yes."
 ];
@@ -53,10 +53,10 @@ const noTexts = [
 ];
 
 const achievements = [
-  "Achievement unlocked: Persistent.",
-  "Achievement unlocked: Still trying.",
-  "Achievement unlocked: Bold strategy.",
-  "Achievement unlocked: Acceptance pending."
+  "Persistent, I see :(",
+  "Still trying to say no, eh?",
+  "Bold strategy, Bella. I am watching you :0",
+  "Are you taking the piss???? >:("
 ];
 
 const photoPositions = [
