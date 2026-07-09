@@ -1,67 +1,96 @@
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const buttonZone = document.getElementById("buttonZone");
+const buttonStage = document.getElementById("buttonStage");
+const hintText = document.getElementById("hintText");
 const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
-const hintText = document.getElementById("hintText");
-const progressFill = document.getElementById("progressFill");
-const progressLabel = document.getElementById("progressLabel");
 const restartBtn = document.getElementById("restartBtn");
 
-let noAttempts = 0;
-let yesChance = 72;
-
-const hints = [
-  "That button seems suspiciously slippery.",
-  "Interesting choice. Try again.",
-  "The No button has trust issues.",
-  "Statistically, Yes is becoming more likely.",
-  "Bold attempt. Poor execution.",
-  "At this point the website has taken a side.",
-  "The “No” button is emotionally unavailable.",
-  "The universe gently rejects that option.",
-  "Look at the Yes button. So stable. So reliable."
+/* EDIT YOUR 9 MESSAGES HERE */
+const noMessages = [
+  "Nice try.",
+  "Hmm. That button is not very cooperative.",
+  "Interesting decision.",
+  "The No button has chosen self-preservation.",
+  "That was close.",
+  "I admire the effort.",
+  "The website respectfully disagrees.",
+  "Statistically, Yes is looking stronger.",
+  "At this point, just press Yes."
 ];
 
-function updateProgress() {
-  yesChance = Math.min(99, yesChance + 5);
-  progressFill.style.width = `${yesChance}%`;
-  progressLabel.textContent = `Current likelihood of saying yes: ${yesChance}%`;
+let noAttempts = 0;
+
+function rectsOverlap(a, b, padding = 14) {
+  return !(
+    a.right + padding < b.left ||
+    a.left - padding > b.right ||
+    a.bottom + padding < b.top ||
+    a.top - padding > b.bottom
+  );
+}
+
+function getRelativeRect(element, parent) {
+  const e = element.getBoundingClientRect();
+  const p = parent.getBoundingClientRect();
+
+  return {
+    left: e.left - p.left,
+    right: e.right - p.left,
+    top: e.top - p.top,
+    bottom: e.bottom - p.top,
+    width: e.width,
+    height: e.height
+  };
 }
 
 function moveNoButton() {
-  const zoneRect = buttonZone.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
+  const stageRect = buttonStage.getBoundingClientRect();
+  const noRect = noBtn.getBoundingClientRect();
+  const yesRelative = getRelativeRect(yesBtn, buttonStage);
 
   const padding = 8;
-  const maxX = zoneRect.width - btnRect.width - padding;
-  const maxY = zoneRect.height - btnRect.height - padding;
+  const maxX = stageRect.width - noRect.width - padding;
+  const maxY = stageRect.height - noRect.height - padding;
 
-  const randomX = Math.max(padding, Math.random() * maxX);
-  const randomY = Math.max(padding, Math.random() * maxY);
+  let x;
+  let y;
+  let candidate;
+  let tries = 0;
 
-  noBtn.style.left = `${randomX}px`;
-  noBtn.style.top = `${randomY}px`;
+  do {
+    x = padding + Math.random() * Math.max(1, maxX - padding);
+    y = padding + Math.random() * Math.max(1, maxY - padding);
+
+    candidate = {
+      left: x,
+      right: x + noRect.width,
+      top: y,
+      bottom: y + noRect.height
+    };
+
+    tries++;
+  } while (rectsOverlap(candidate, yesRelative, 20) && tries < 80);
+
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
   noBtn.style.transform = "none";
 
-  noAttempts += 1;
+  noAttempts++;
 
-  const scale = Math.max(0.72, 1 - noAttempts * 0.045);
-  noBtn.style.transform = `scale(${scale})`;
+  const messageIndex = Math.min(noAttempts - 1, noMessages.length - 1);
+  hintText.textContent = noMessages[messageIndex];
 
-  yesBtn.style.transform = `translate(-50%, -50%) scale(${1 + noAttempts * 0.035})`;
+  const noScale = Math.max(0.74, 1 - noAttempts * 0.035);
+  const yesScale = Math.min(1.24, 1 + noAttempts * 0.035);
 
-  hintText.textContent = hints[Math.min(noAttempts - 1, hints.length - 1)];
-  updateProgress();
-
-  buttonZone.classList.remove("shake");
-  void buttonZone.offsetWidth;
-  buttonZone.classList.add("shake");
+  noBtn.style.transform = `scale(${noScale})`;
+  yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
 }
 
 function isNearNoButton(x, y) {
   const rect = noBtn.getBoundingClientRect();
-  const buffer = 65;
+  const buffer = 70;
 
   return (
     x > rect.left - buffer &&
@@ -71,16 +100,31 @@ function isNearNoButton(x, y) {
   );
 }
 
-document.addEventListener("pointermove", (event) => {
+/* Desktop Chrome */
+document.addEventListener("mousemove", (event) => {
   if (isNearNoButton(event.clientX, event.clientY)) {
     moveNoButton();
   }
 });
 
-noBtn.addEventListener("pointerdown", (event) => {
-  event.preventDefault();
-  moveNoButton();
-});
+/* Mobile */
+document.addEventListener("touchstart", (event) => {
+  const touch = event.touches[0];
+  if (!touch) return;
+
+  if (isNearNoButton(touch.clientX, touch.clientY)) {
+    moveNoButton();
+  }
+}, { passive: true });
+
+document.addEventListener("touchmove", (event) => {
+  const touch = event.touches[0];
+  if (!touch) return;
+
+  if (isNearNoButton(touch.clientX, touch.clientY)) {
+    moveNoButton();
+  }
+}, { passive: true });
 
 noBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -93,19 +137,18 @@ yesBtn.addEventListener("click", () => {
 });
 
 restartBtn.addEventListener("click", () => {
+  noAttempts = 0;
+
   successCard.classList.add("hidden");
   questionCard.classList.remove("hidden");
 
-  noAttempts = 0;
-  yesChance = 72;
+  hintText.textContent = "Take your time.";
 
-  progressFill.style.width = "72%";
-  progressLabel.textContent = "Current likelihood of saying yes: 72%";
-  hintText.textContent = "Choose wisely.";
-
-  noBtn.style.left = "58%";
-  noBtn.style.top = "50%";
-  noBtn.style.transform = "translate(-50%, -50%)";
-
+  yesBtn.style.left = "26%";
+  yesBtn.style.top = "55%";
   yesBtn.style.transform = "translate(-50%, -50%)";
+
+  noBtn.style.left = "68%";
+  noBtn.style.top = "55%";
+  noBtn.style.transform = "translate(-50%, -50%)";
 });
