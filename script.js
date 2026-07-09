@@ -7,6 +7,7 @@ const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
 let lastMove = 0;
 const moveCooldown = 500;
+const photos = document.querySelectorAll(".photo-grid img");
 
 /* EDIT YOUR 9 MESSAGES HERE */
 const noMessages = [
@@ -62,7 +63,9 @@ function moveNoButton() {
   let y;
   let candidate;
   let tries = 0;
-
+  if(noAttempts <= photos.length){
+    photos[noAttempts-1].classList.add("show");
+  }
   do {
     x = padding + Math.random() * Math.max(1, maxX - padding);
     y = padding + Math.random() * Math.max(1, maxY - padding);
@@ -87,7 +90,8 @@ function moveNoButton() {
   hintText.textContent = noMessages[messageIndex];
 
   const noScale = Math.max(0.74, 1 - noAttempts * 0.035);
-  const yesScale = Math.min(1.24, 1 + noAttempts * 0.035);
+  const yesScale = Math.min(1.45, 1 + noAttempts * 0.05);
+  yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
 
   noBtn.style.transform = `scale(${noScale})`;
   yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
