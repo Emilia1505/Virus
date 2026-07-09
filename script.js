@@ -6,11 +6,11 @@ const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
 const mainHeading = document.getElementById("mainHeading");
-const photos = document.querySelectorAll(".photo-grid img");
+const photos = document.querySelectorAll(".bg-photo");
 
 let noAttempts = 0;
 let lastMove = 0;
-const moveCooldown = 500;
+const moveCooldown = 650;
 
 const noMessages = [
   "That button has commitment issues.",
@@ -23,6 +23,27 @@ const noMessages = [
   "Statistically, Yes is looking stronger.",
   "At this point, just press Yes."
 ];
+
+const photoPositions = [
+  { top: "5%", left: "6%", rotation: "-8deg" },
+  { top: "8%", right: "7%", rotation: "7deg" },
+  { top: "34%", left: "3%", rotation: "5deg" },
+  { top: "36%", right: "4%", rotation: "-6deg" },
+  { bottom: "7%", left: "7%", rotation: "8deg" },
+  { bottom: "6%", right: "8%", rotation: "-7deg" },
+  { top: "69%", left: "25%", rotation: "-4deg" },
+  { top: "68%", right: "24%", rotation: "5deg" },
+  { top: "2%", left: "42%", rotation: "3deg" }
+];
+
+photos.forEach((photo, index) => {
+  const position = photoPositions[index];
+
+  if (!position) return;
+
+  Object.assign(photo.style, position);
+  photo.style.setProperty("--rotation", position.rotation);
+});
 
 function rectsOverlap(a, b, padding = 18) {
   return !(
