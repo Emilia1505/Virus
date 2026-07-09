@@ -44,6 +44,13 @@ body {
   animation: appear 450ms ease both;
 }
 
+.no{
+    transition:
+        left .35s ease,
+        top .35s ease,
+        transform .25s ease;
+}
+
 .eyebrow {
   display: inline-block;
   margin: 0 0 14px;
