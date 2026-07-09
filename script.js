@@ -162,7 +162,7 @@ function moveNoButton() {
   };
 
   const padding = 8;
-  const minX = stageRect.width * 0.58;
+  const minX = stageRect.width * 0.66;
   const maxX = stageRect.width - noWidth - padding;
   const minY = padding;
   const maxY = stageRect.height - noHeight - padding;
@@ -197,10 +197,10 @@ function moveNoButton() {
     mainHeading.textContent = "I think you already know the correct answer.";
   }
 
-  const noScale = Math.max(0.78, 1 - noAttempts * 0.025);
-  const yesScale = Math.min(1.14, 1 + noAttempts * 0.02);
+  const noScale = Math.max(0.62, 1 - noAttempts * 0.045);
+  const yesScale = Math.min(1.08, 1 + noAttempts * 0.012);
 
-  noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 8 - 4}deg)`;
+  noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 10 - 5}deg)`;
   yesBtn.style.transform = `translate(-50%,-50%) scale(${yesScale})`;
 
   updateExtras();
