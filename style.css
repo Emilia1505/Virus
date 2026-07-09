@@ -22,6 +22,34 @@ body {
     radial-gradient(circle at 20% 10%, rgba(0, 115, 182, 0.22), transparent 28%),
     radial-gradient(circle at 90% 80%, rgba(0, 115, 182, 0.14), transparent 26%),
     linear-gradient(145deg, #ffffff, var(--blue-pale));
+  overflow-x: hidden;
+}
+
+#photoBackground {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-photo {
+  position: absolute;
+  width: 105px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 7px solid white;
+  border-bottom-width: 18px;
+  border-radius: 14px;
+  opacity: 0;
+  transform: scale(0.82) rotate(-6deg);
+  transition: opacity 650ms ease, transform 650ms ease;
+  box-shadow: 0 18px 45px rgba(18, 57, 84, 0.2);
+}
+
+.bg-photo.show {
+  opacity: 0.88;
+  transform: scale(1) rotate(var(--rotation, 0deg));
 }
 
 .app {
@@ -29,10 +57,12 @@ body {
   display: grid;
   place-items: center;
   padding: 22px;
+  position: relative;
+  z-index: 2;
 }
 
 .card {
-  width: min(100%, 430px);
+  width: min(100%, 390px);
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--border);
   border-radius: 32px;
@@ -41,6 +71,8 @@ body {
   box-shadow: 0 28px 80px rgba(18, 57, 84, 0.16);
   backdrop-filter: blur(12px);
   animation: appear 450ms ease both;
+  position: relative;
+  z-index: 5;
 }
 
 .eyebrow {
@@ -58,46 +90,22 @@ body {
 
 h1 {
   margin: 0;
-  font-size: clamp(2.1rem, 9vw, 3.3rem);
+  font-size: clamp(2rem, 8vw, 3rem);
   line-height: 1;
   letter-spacing: -0.05em;
 }
 
 .intro {
   max-width: 330px;
-  margin: 16px auto 22px;
+  margin: 16px auto 18px;
   color: var(--muted);
   line-height: 1.5;
 }
 
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  margin: 20px 0 10px;
-}
-
-.photo-grid img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 20px;
-  background: var(--blue-soft);
-  border: 1px solid var(--border);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 400ms ease, transform 400ms ease;
-}
-
-.photo-grid img.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .button-stage {
   position: relative;
-  height: 155px;
-  margin-top: 14px;
+  height: 130px;
+  margin-top: 8px;
   overflow: hidden;
 }
 
@@ -110,9 +118,9 @@ h1 {
   cursor: pointer;
   touch-action: manipulation;
   transition:
-    left 350ms ease,
-    top 350ms ease,
-    transform 250ms ease,
+    left 450ms ease,
+    top 450ms ease,
+    transform 300ms ease,
     background 160ms ease,
     box-shadow 160ms ease;
 }
@@ -167,6 +175,18 @@ h1 {
 
 .success {
   padding-bottom: 32px;
+}
+
+@media (max-width: 480px) {
+  .bg-photo {
+    width: 82px;
+    border-width: 5px;
+    border-bottom-width: 14px;
+  }
+
+  .card {
+    width: min(100%, 370px);
+  }
 }
 
 @keyframes appear {
