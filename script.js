@@ -5,6 +5,8 @@ const hintText = document.getElementById("hintText");
 const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
 const restartBtn = document.getElementById("restartBtn");
+let lastMove = 0;
+const moveCooldown = 500;
 
 /* EDIT YOUR 9 MESSAGES HERE */
 const noMessages = [
@@ -45,6 +47,9 @@ function getRelativeRect(element, parent) {
 }
 
 function moveNoButton() {
+  const now = Date.now();
+  if (now - lastMove < moveCooldown) return;
+  lastMove = now;
   const stageRect = buttonStage.getBoundingClientRect();
   const noRect = noBtn.getBoundingClientRect();
   const yesRelative = getRelativeRect(yesBtn, buttonStage);
