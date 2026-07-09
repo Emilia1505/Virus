@@ -264,17 +264,27 @@ function showSuccessSequence() {
   setTimeout(function () {
     successHeading.textContent = "Checking compatibility...";
     successText.textContent = "This is an important decision.";
-  }, 900);
+  }, 1000);
 
   setTimeout(function () {
     successHeading.textContent = "Searching for reasons to say no...";
     successText.textContent = "Scanning...";
-  }, 1800);
+  }, 2100);
+
+  setTimeout(() => {
+    successHeading.textContent = "Hmm...";
+    successText.textContent = "Still checking...";
+  }, 3800);
+
+  setTimeout(() => {
+    successHeading.textContent = "Searching harder...";
+    successText.textContent = "This is taking longer than expected...";
+  }, 5300);
 
   setTimeout(function () {
     successHeading.textContent = "None found.";
     successText.textContent = "That is the correct answer.";
-  }, 2700);
+  }, 6800);
 
   setTimeout(function () {
     successEyebrow.textContent = "Mission complete";
@@ -288,7 +298,7 @@ function showSuccessSequence() {
     legoWalk.classList.remove("hidden");
     restartBtn.style.display = "inline-block";
     launchConfetti();
-  }, 3600);
+  }, 9000);
 }
 
 document.addEventListener("mousemove", (event) => {
