@@ -64,16 +64,16 @@ const achievements = [
 ];
 
 const photoPositions = [
-  { top: "2%", left: "3%", rotation: "-8deg" },
-  { top: "6%", left: "21%", rotation: "6deg" },
-  { top: "2%", left: "40%", rotation: "-3deg" },
-  { top: "6%", right: "21%", rotation: "7deg" },
-  { top: "2%", right: "3%", rotation: "-6deg" },
+  { top: "24px", left: "3%", rotation: "-8deg" },
+  { top: "56px", left: "21%", rotation: "6deg" },
+  { top: "24px", left: "40%", rotation: "-3deg" },
+  { top: "56px", right: "21%", rotation: "7deg" },
+  { top: "24px", right: "3%", rotation: "-6deg" },
 
-  { bottom: "62px", left: "4%", rotation: "5deg" },
-  { bottom: "38px", left: "29%", rotation: "-7deg" },
-  { bottom: "62px", right: "29%", rotation: "4deg" },
-  { bottom: "38px", right: "4%", rotation: "-5deg" }
+  { bottom: "24px", left: "4%", rotation: "5deg" },
+  { bottom: "48px", left: "29%", rotation: "-7deg" },
+  { bottom: "24px", right: "29%", rotation: "4deg" },
+  { bottom: "48px", right: "4%", rotation: "-5deg" }
 ];
 photos.forEach((photo, index) => {
   const position = photoPositions[index];
