@@ -44,6 +44,17 @@ body {
   animation: appear 450ms ease both;
 }
 
+.photo-grid img{
+    opacity:0;
+    transform:scale(.9);
+    transition:.4s;
+}
+
+.photo-grid img.show{
+    opacity:1;
+    transform:scale(1);
+}
+
 .no{
     transition:
         left .35s ease,
