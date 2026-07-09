@@ -1,12 +1,11 @@
 :root {
-  --blue: #0073B6; /* RAL 5015 */
+  --blue: #0073B6;
   --blue-dark: #00598d;
   --blue-soft: #dff2fb;
   --blue-pale: #f1f9fd;
 
   --text: #152333;
   --muted: #657282;
-  --white: #ffffff;
   --border: rgba(0, 115, 182, 0.18);
 }
 
@@ -42,24 +41,6 @@ body {
   box-shadow: 0 28px 80px rgba(18, 57, 84, 0.16);
   backdrop-filter: blur(12px);
   animation: appear 450ms ease both;
-}
-
-.photo-grid img{
-    opacity:0;
-    transform:scale(.9);
-    transition:.4s;
-}
-
-.photo-grid img.show{
-    opacity:1;
-    transform:scale(1);
-}
-
-.no{
-    transition:
-        left .35s ease,
-        top .35s ease,
-        transform .25s ease;
 }
 
 .eyebrow {
@@ -103,6 +84,14 @@ h1 {
   border-radius: 20px;
   background: var(--blue-soft);
   border: 1px solid var(--border);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.photo-grid img.show {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .button-stage {
@@ -121,14 +110,11 @@ h1 {
   cursor: pointer;
   touch-action: manipulation;
   transition:
-    transform 160ms ease,
+    left 350ms ease,
+    top 350ms ease,
+    transform 250ms ease,
     background 160ms ease,
-    box-shadow 160ms ease,
-    opacity 160ms ease;
-}
-
-.btn:active {
-  transform: scale(0.95);
+    box-shadow 160ms ease;
 }
 
 .yes {
@@ -161,6 +147,11 @@ h1 {
   left: 68%;
   top: 55%;
   transform: translate(-50%, -50%);
+}
+
+.replay {
+  position: static;
+  transform: none;
 }
 
 .hint {
