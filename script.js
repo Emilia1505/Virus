@@ -70,10 +70,10 @@ const photoPositions = [
   { top: "56px", right: "21%", rotation: "7deg" },
   { top: "24px", right: "3%", rotation: "-6deg" },
 
-  { bottom: "24px", left: "4%", rotation: "5deg" },
-  { bottom: "48px", left: "29%", rotation: "-7deg" },
-  { bottom: "24px", right: "29%", rotation: "4deg" },
-  { bottom: "48px", right: "4%", rotation: "-5deg" }
+  { bottom: "10px", left: "4%", rotation: "5deg" },
+  { bottom: "0px", left: "29%", rotation: "-7deg" },
+  { bottom: "10px", right: "29%", rotation: "4deg" },
+  { bottom: "0px", right: "4%", rotation: "-5deg" }
 ];
 photos.forEach((photo, index) => {
   const position = photoPositions[index];
