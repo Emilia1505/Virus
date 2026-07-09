@@ -119,8 +119,31 @@ h1 {
   margin: 18px auto 22px;
   color: var(--blue-dark);
   font-weight: 850;
-  font-size: 1.08rem;
+  font-size: 1.1rem;
   line-height: 1.45;
+}
+
+.score {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.achievement {
+  margin-top: 10px;
+  color: var(--blue-dark);
+  font-weight: 800;
+  min-height: 22px;
+}
+
+.photo-pop {
+  animation: photoPop .45s ease;
+}
+
+@keyframes photoPop {
+  0% { transform: scale(.75) rotate(var(--rotation)); }
+  70% { transform: scale(1.08) rotate(var(--rotation)); }
+  100% { transform: scale(1) rotate(var(--rotation)); }
 }
 
 .button-stage {
