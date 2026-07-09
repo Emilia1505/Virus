@@ -70,12 +70,11 @@ const photoPositions = [
   { top: "6%", right: "21%", rotation: "7deg" },
   { top: "2%", right: "3%", rotation: "-6deg" },
 
-  { bottom: "16%", left: "4%", rotation: "5deg" },
-  { bottom: "13%", left: "28%", rotation: "-7deg" },
-  { bottom: "16%", right: "28%", rotation: "4deg" },
-  { bottom: "13%", right: "4%", rotation: "-5deg" }
+  { bottom: "21%", left: "4%", rotation: "5deg" },
+  { bottom: "18%", left: "29%", rotation: "-7deg" },
+  { bottom: "21%", right: "29%", rotation: "4deg" },
+  { bottom: "18%", right: "4%", rotation: "-5deg" }
 ];
-
 photos.forEach((photo, index) => {
   const position = photoPositions[index];
   if (!position) return;
@@ -255,17 +254,17 @@ function showSuccessSequence() {
   setTimeout(function () {
     successHeading.textContent = "Checking compatibility...";
     successText.textContent = "This is an important decision.";
-  }, 700);
+  }, 800);
 
   setTimeout(function () {
     successHeading.textContent = "Searching for reasons to say no...";
     successText.textContent = "Scanning...";
-  }, 1500);
+  }, 1600);
 
   setTimeout(function () {
     successHeading.textContent = "None found.";
     successText.textContent = "That is the correct answer.";
-  }, 2300);
+  }, 2400);
 
   setTimeout(function () {
     successEyebrow.textContent = "Mission complete";
@@ -279,7 +278,7 @@ function showSuccessSequence() {
     legoWalk.classList.remove("hidden");
     restartBtn.style.display = "inline-block";
     launchConfetti();
-  }, 3100);
+  }, 3200);
 }
 
 document.addEventListener("mousemove", (event) => {
