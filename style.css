@@ -39,7 +39,7 @@ body {
 
 .bg-photo {
   position: absolute;
-  width: 98px;
+  width: 88px;
   aspect-ratio: 1;
   object-fit: cover;
   border: 7px solid white;
@@ -113,6 +113,14 @@ h1 {
   color: var(--muted);
   max-width: 280px;
   line-height: 1.55;
+}
+
+.final-line {
+  margin: 18px auto 22px;
+  color: var(--blue-dark);
+  font-weight: 850;
+  font-size: 1.08rem;
+  line-height: 1.45;
 }
 
 .button-stage {
