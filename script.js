@@ -159,12 +159,12 @@ function moveNoButton() {
   const yesTop = stageRect.height * 0.28;
   const yesSafeZone = {
     left: yesLeft - 18,
-    right: yesLeft + yesWidth + 46,
+    right: yesLeft + yesWidth + 20,
     top: yesTop - 18,
-    bottom: yesTop + yesHeight + 36
+    bottom: yesTop + yesHeight + 18
   };
 
-  const padding = 8;
+  const padding = 2;
   const minX = stageRect.width * 0.66;
   const maxX = stageRect.width - noWidth - padding;
   const minY = padding;
@@ -184,7 +184,7 @@ function moveNoButton() {
     };
 
     tries++;
-  } while (rectsOverlap(candidate, yesSafeZone, 20) && tries < 100);
+  } while (rectsOverlap(candidate, yesSafeZone, 9) && tries < 100);
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
