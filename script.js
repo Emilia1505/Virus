@@ -334,7 +334,7 @@ noBtn.addEventListener("click",(event)=>{
             noBtn.style.opacity = "1";
             noBtn.style.pointerEvents = "auto";
 
-        },350);
+        },800);
 
         return;
 
