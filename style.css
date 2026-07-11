@@ -205,10 +205,9 @@ h1 {
 }
 
 #noBtn {
-  position:fixed;
-  left:75%;
-  top:60%;
-  z-index:100;
+  left: 72%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 }
 
 .replay {
