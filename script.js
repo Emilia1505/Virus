@@ -98,32 +98,6 @@ const achievement = document.createElement("p");
 achievement.className = "achievement";
 questionCard.appendChild(achievement);
 
-/*
-  Ensures that the button uses viewport coordinates,
-  even if the CSS was not updated perfectly.
-*/
-noBtn.style.position = "fixed";
-noBtn.style.zIndex = "100";
-
-function getViewport() {
-  const viewport = window.visualViewport;
-
-  if (viewport) {
-    return {
-      left: viewport.offsetLeft,
-      top: viewport.offsetTop,
-      width: viewport.width,
-      height: viewport.height
-    };
-  }
-
-  return {
-    left: 0,
-    top: 0,
-    width: window.innerWidth,
-    height: window.innerHeight
-  };
-}
 
 function rectsOverlap(a, b, padding = 0) {
   return !(
@@ -189,25 +163,41 @@ function findSafePosition() {
     noHeight -
     screenMargin;
 
-  /*
-    The No button may roam anywhere except the protected
-    area surrounding the Yes button.
-  */
+function moveNoButton() {
+  const now = Date.now();
+
+  if (now - lastMove < moveCooldown) return;
+  lastMove = now;
+
+  noAttempts++;
+
+  const stageRect = buttonStage.getBoundingClientRect();
+  const noWidth = noBtn.offsetWidth;
+  const noHeight = noBtn.offsetHeight;
+
+  const yesRect = yesBtn.getBoundingClientRect();
+  const stageLeft = stageRect.left;
+  const stageTop = stageRect.top;
+
   const yesSafeZone = {
-    left: yesRect.left - yesSafetyPadding,
-    right: yesRect.right + yesSafetyPadding,
-    top: yesRect.top - yesSafetyPadding,
-    bottom: yesRect.bottom + yesSafetyPadding
+    left: yesRect.left - stageLeft - 28,
+    right: yesRect.right - stageLeft + 28,
+    top: yesRect.top - stageTop - 24,
+    bottom: yesRect.bottom - stageTop + 24
   };
 
-  let x = minX;
-  let y = minY;
+  const padding = 8;
+  const maxX = stageRect.width - noWidth - padding;
+  const maxY = stageRect.height - noHeight - padding;
+
+  let x;
+  let y;
   let candidate;
   let tries = 0;
 
   do {
-    x = minX + Math.random() * Math.max(1, maxX - minX);
-    y = minY + Math.random() * Math.max(1, maxY - minY);
+    x = padding + Math.random() * Math.max(1, maxX - padding);
+    y = padding + Math.random() * Math.max(1, maxY - padding);
 
     candidate = {
       left: x,
@@ -216,47 +206,11 @@ function findSafePosition() {
       bottom: y + noHeight
     };
 
-    tries += 1;
+    tries++;
   } while (
-    rectsOverlap(candidate, yesSafeZone) &&
-    tries < 150
+    rectsOverlap(candidate, yesSafeZone, 12) &&
+    tries < 100
   );
-
-  /*
-    Extremely unlikely fallback: put it in the corner
-    furthest from the Yes button.
-  */
-  if (rectsOverlap(candidate, yesSafeZone)) {
-    const yesCentreX = yesRect.left + yesRect.width / 2;
-    const yesCentreY = yesRect.top + yesRect.height / 2;
-
-    x =
-      yesCentreX < viewport.left + viewport.width / 2
-        ? maxX
-        : minX;
-
-    y =
-      yesCentreY < viewport.top + viewport.height / 2
-        ? maxY
-        : minY;
-  }
-
-  return { x, y };
-}
-
-function moveNoButton({ ignoreCooldown = false } = {}) {
-  const now = Date.now();
-
-  if (!ignoreCooldown && now - lastMove < moveCooldown) {
-    return;
-  }
-
-  if (noIsDisappearing) return;
-
-  lastMove = now;
-  noAttempts += 1;
-
-  const { x, y } = findSafePosition();
 
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
@@ -268,9 +222,7 @@ function moveNoButton({ ignoreCooldown = false } = {}) {
   }
 
   hintText.textContent =
-    noMessages[
-      Math.min(noAttempts - 1, noMessages.length - 1)
-    ];
+    noMessages[Math.min(noAttempts - 1, noMessages.length - 1)];
 
   if (noAttempts >= 5) {
     mainHeading.textContent =
@@ -278,13 +230,13 @@ function moveNoButton({ ignoreCooldown = false } = {}) {
   }
 
   const noScale = Math.max(
-    0.58,
-    1 - noAttempts * 0.05
+    0.32,
+    1 - noAttempts * 0.06
   );
 
   const yesScale = Math.min(
     1.04,
-    1 + noAttempts * 0.005
+    1 + noAttempts * 0.06
   );
 
   const rotation = Math.random() * 10 - 5;
@@ -300,46 +252,10 @@ function moveNoButton({ ignoreCooldown = false } = {}) {
   if (noAttempts >= 9) {
     yesBtn.style.animation = "pulse .8s";
 
-    window.setTimeout(() => {
+    setTimeout(() => {
       yesBtn.style.animation = "";
-    }, 800);
+    }, 1600);
   }
-}
-
-function isNearNoButton(x, y) {
-  const rect = noBtn.getBoundingClientRect();
-  const buffer = 48;
-
-  return (
-    x > rect.left - buffer &&
-    x < rect.right + buffer &&
-    y > rect.top - buffer &&
-    y < rect.bottom + buffer
-  );
-}
-
-function disappearNoButton() {
-  if (noIsDisappearing) return;
-
-  noIsDisappearing = true;
-  hintText.textContent = "Seriously?!";
-
-  noBtn.style.opacity = "0";
-  noBtn.style.pointerEvents = "none";
-
-  window.setTimeout(() => {
-    noIsDisappearing = false;
-
-    /*
-      Reset the cooldown so the forced movement
-      definitely happens after the disappearance.
-    */
-    lastMove = 0;
-    moveNoButton({ ignoreCooldown: true });
-
-    noBtn.style.opacity = "1";
-    noBtn.style.pointerEvents = "auto";
-  }, 1600);
 }
 
 function launchConfetti() {
@@ -435,42 +351,6 @@ function showSuccessSequence() {
   }, 9000);
 }
 
-function resetNoButtonPosition() {
-  noBtn.style.display = "block";
-  noBtn.style.opacity = "1";
-  noBtn.style.pointerEvents = "auto";
-  noBtn.style.transform = "none";
-
-  const viewport = getViewport();
-  const yesRect = yesBtn.getBoundingClientRect();
-
-  const noWidth = noBtn.offsetWidth;
-  const noHeight = noBtn.offsetHeight;
-
-  let x = yesRect.right + 24;
-  let y =
-    yesRect.top +
-    yesRect.height / 2 -
-    noHeight / 2;
-
-  const maxX =
-    viewport.left +
-    viewport.width -
-    noWidth -
-    screenMargin;
-
-  const maxY =
-    viewport.top +
-    viewport.height -
-    noHeight -
-    screenMargin;
-
-  x = Math.min(maxX, Math.max(viewport.left + screenMargin, x));
-  y = Math.min(maxY, Math.max(viewport.top + screenMargin, y));
-
-  noBtn.style.left = `${x}px`;
-  noBtn.style.top = `${y}px`;
-}
 
 document.addEventListener("mousemove", (event) => {
   if (
@@ -559,27 +439,3 @@ restartBtn.addEventListener("click", () => {
 
   requestAnimationFrame(resetNoButtonPosition);
 });
-
-/*
-  Keep the No button on-screen if the phone rotates
-  or the browser viewport changes.
-*/
-window.addEventListener("resize", () => {
-  if (!questionCard.classList.contains("hidden")) {
-    resetNoButtonPosition();
-  }
-});
-
-if (window.visualViewport) {
-  window.visualViewport.addEventListener("resize", () => {
-    if (!questionCard.classList.contains("hidden")) {
-      resetNoButtonPosition();
-    }
-  });
-}
-
-/*
-  Wait until the layout is ready before placing No
-  beside Yes for the first time.
-*/
-requestAnimationFrame(resetNoButtonPosition);
