@@ -1,66 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Decision Support Tool</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div id="photoBackground">
-    <img src="Images/photo1.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo2.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo3.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo4.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo5.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo6.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo7.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo8.jpeg" class="bg-photo" alt="">
-    <img src="Images/photo9.jpeg" class="bg-photo" alt="">
-  </div>
+  <main class="landing-page">
+    <section class="landing-card">
+      <p class="eyebrow">Isabelles corner</p>
 
-  <div id="confettiLayer"></div>
-
-  <main class="app">
-    <section class="card" id="questionCard">
-      <p class="eyebrow">Why are you Gay?</p>
-      
-      <h1 id="mainHeading">Will you be my girlfriend?</h1>
+      <h1>Welcome.</h1>
 
       <p class="intro">
-        You can say no. Theoretically.
+        Please choose one of the following options.
       </p>
 
-      <div class="button-stage" id="buttonStage">
-        <button class="btn yes" id="yesBtn">Yes</button>
-        <button class="btn no" id="noBtn">No</button>
+      <div class="landing-actions">
+        <a class="landing-btn primary" href="proposal.html">
+          You know where this leads you
+        </a>
+
+        <button class="landing-btn danger" id="doNotPressBtn">
+            Don't press me
+        </button>
       </div>
-
-      <p class="hint" id="hintText">Go on. Try the No button.</p>
-    </section>
-
-    <section class="card success hidden" id="successCard">
-      <p class="eyebrow" id="successEyebrow">Mission complete</p>
-
-      <h1 id="successHeading">Analysing response...</h1>
-    
-      <p class="intro" id="successText">
-        Please wait.
-      </p>
-    
-      <p class="final-line hidden" id="finalLine">
-      💖 No take-backsies 😜
-      </p>
-    
-      <div class="lego-walk hidden" id="legoWalk">🚶‍♀️</div>
-    
-      <button class="btn yes replay" id="restartBtn">Run the simulation again</button>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Decision Support Tool</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="meme-page">
+    <section class="sequence-card" id="sequenceCard">
+      <h1 id="sequenceText">...</h1>
+    </section>
+
+    <section class="meme-card hidden" id="memeCard">
+      <img
+        src="Images/meme.jpg"
+        class="meme-image"
+        alt="You were warned"
+      >
+
+      <p class="meme-caption">
+        You were warned.
+      </p>
+
+      <a class="landing-btn primary" href="index.html">
+        Back to main menu
+      </a>
+    </section>
+  </main>
+
+  <script>
+    const sequenceCard = document.getElementById("sequenceCard");
+    const sequenceText = document.getElementById("sequenceText");
+    const memeCard = document.getElementById("memeCard");
+
+    function updateSequenceText(text) {
+      sequenceText.style.animation = "none";
+      void sequenceText.offsetWidth;
+
+      sequenceText.textContent = text;
+      sequenceText.style.animation = "sequenceFade 350ms ease";
+    }
+
+    window.setTimeout(() => {
+      updateSequenceText("Seriously?");
+    }, 1000);
+
+    window.setTimeout(() => {
+      updateSequenceText("I literally told you not to press it.");
+    }, 2000);
+
+    setTimeout(() => {
+    sequenceCard.classList.add("hidden");
+    memeCard.classList.remove("hidden");
+}, 4000);
+
+  </script>
+</body>
+</html>
