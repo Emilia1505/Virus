@@ -17,7 +17,7 @@
 
     <section class="meme-card hidden" id="memeCard">
       <img
-        src="Images/meme.jpeg"
+        src="Images/meme.jpg"
         class="meme-image"
         alt="You were warned"
       >
@@ -53,14 +53,11 @@
       updateSequenceText("I literally told you not to press it.");
     }, 2000);
 
-    window.setTimeout(() => {
-      updateSequenceText("...");
-    }, 4000);
+    setTimeout(() => {
+    sequenceCard.classList.add("hidden");
+    memeCard.classList.remove("hidden");
+}, 4000);
 
-    window.setTimeout(() => {
-      sequenceCard.classList.add("hidden");
-      memeCard.classList.remove("hidden");
-    }, 5000);
   </script>
 </body>
 </html>

@@ -347,3 +347,17 @@ h1 {
     transform: translateY(0);
   }
 }
+
+.landing-btn.danger {
+    background: #d94841;
+    color: white;
+    box-shadow: 0 10px 24px rgba(217,72,65,.35);
+}
+
+.landing-btn.danger:hover{
+    background:#c63b34;
+}
+
+.landing-btn.danger:active{
+    transform:scale(.97);
+}
