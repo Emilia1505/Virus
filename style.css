@@ -261,3 +261,89 @@ h1 {
     }
 
 }
+.landing-page,
+.meme-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.landing-card,
+.sequence-card,
+.meme-card {
+  width: min(360px, 92vw);
+  padding: 32px 24px 28px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.14);
+  text-align: center;
+}
+
+.landing-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.landing-btn {
+  display: block;
+  width: 100%;
+  padding: 15px 22px;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.landing-btn.primary {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 115, 182, 0.25);
+}
+
+.landing-btn.secondary {
+  background: #eef3f7;
+  color: #4f5f68;
+}
+
+.sequence-card {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+.meme-card {
+  width: min(400px, 92vw);
+}
+
+.meme-image {
+  display: block;
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+
+.meme-caption {
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+@keyframes sequenceFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
