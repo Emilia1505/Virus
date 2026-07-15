@@ -20,7 +20,22 @@ A small, evolving website for Bella.
 - Add fake software patch notes
 - Add known issues section
 
-### v1.3 — Achievements
+### v1.3.1 — Message Terminal
+
+- Add “Send a transmission” to the landing page
+- Bella can send a short message
+- Message arrives privately by email
+- Show a custom success response
+- Optional message category:
+  - General transmission
+  - Bug report
+  - Feature request
+  - Girlfriend complaint
+
+
+
+
+### v1.3.2 — Achievements
 - Girlfriend acquired
 - Curious
 - Survived German humour
