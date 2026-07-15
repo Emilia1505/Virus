@@ -31,5 +31,94 @@
       </div>
     </section>
   </main>
+
+<!-- Small message button -->
+<button
+  class="letter-button"
+  id="letterButton"
+  type="button"
+  aria-label="Open message"
+>
+  ✉️
+  <span class="letter-notification"></span>
+</button>
+
+<!-- Message popup -->
+<div class="letter-overlay hidden" id="letterOverlay">
+  <section class="letter-card" role="dialog" aria-modal="true">
+    <button
+      class="letter-close"
+      id="letterClose"
+      type="button"
+      aria-label="Close message"
+    >
+      ×
+    </button>
+
+    <p class="eyebrow">Incoming message</p>
+
+    <h1>Wizard Stick</h1>
+
+    <div class="letter-content">
+      <p>I miss you loads.</p>
+
+      <p>
+        Hope you love Italy as much as I do. 💙
+      </p>
+    </div>
+
+    <button
+      class="landing-btn primary"
+      id="letterCloseButton"
+      type="button"
+    >
+      Message received
+    </button>
+  </section>
+</div>
+
+<script>
+  const letterButton =
+    document.getElementById("letterButton");
+
+  const letterOverlay =
+    document.getElementById("letterOverlay");
+
+  const letterClose =
+    document.getElementById("letterClose");
+
+  const letterCloseButton =
+    document.getElementById("letterCloseButton");
+
+  function openLetter() {
+    letterOverlay.classList.remove("hidden");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeLetter() {
+    letterOverlay.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  }
+
+  letterButton.addEventListener("click", openLetter);
+  letterClose.addEventListener("click", closeLetter);
+  letterCloseButton.addEventListener("click", closeLetter);
+
+  letterOverlay.addEventListener("click", (event) => {
+    if (event.target === letterOverlay) {
+      closeLetter();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      !letterOverlay.classList.contains("hidden")
+    ) {
+      closeLetter();
+    }
+  });
+</script>  
 </body>
+
 </html>
