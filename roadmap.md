@@ -12,6 +12,11 @@ A small, evolving website for Bella.
 - Meme page
 - Back to main menu button
 
+### v1.1.1 - adding hidden message
+- small letter icon added 
+- message added
+
+
 ## Next updates
 
 ### v1.2 — Patch Notes
