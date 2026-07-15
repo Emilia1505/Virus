@@ -4,7 +4,7 @@ const buttonStage = document.getElementById("buttonStage");
 const hintText = document.getElementById("hintText");
 const questionCard = document.getElementById("questionCard");
 const successCard = document.getElementById("successCard");
-const restartBtn = document.getElementById("restartBtn");
+const homeBtn = document.getElementById("homeBtn");
 const mainHeading = document.getElementById("mainHeading");
 const photoBackground = document.getElementById("photoBackground");
 const confettiLayer = document.getElementById("confettiLayer");
@@ -253,7 +253,7 @@ function showSuccessSequence() {
   photoBackground.classList.add("hide-photos");
   successCard.classList.remove("hidden");
 
-  restartBtn.style.display = "none";
+  homeBtn.style.display = "none";
   finalLine.classList.add("hidden");
   legoWalk.classList.add("hidden");
 
@@ -296,7 +296,7 @@ function showSuccessSequence() {
 
     finalLine.classList.remove("hidden");
     legoWalk.classList.remove("hidden");
-    restartBtn.style.display = "inline-block";
+    homeBtn.style.display = "inline-block";
     launchConfetti();
   }, 9000);
 }
@@ -346,36 +346,6 @@ noBtn.addEventListener("click",(event)=>{
 
 yesBtn.addEventListener("click", showSuccessSequence);
 
-restartBtn.addEventListener("click", () => {
-  noAttempts = 0;
-  lastMove = 0;
-
-  legoWalk.classList.add("hidden");
-  successEyebrow.textContent = "Mission complete";
-
-  successCard.classList.add("hidden");
-  questionCard.classList.remove("hidden");
-  photoBackground.classList.remove("hide-photos");
-
-  hintText.textContent = "Go on. Try the No button.";
-  mainHeading.textContent = "Will you be my girlfriend?";
-  document.querySelector(".eyebrow").textContent = "Why are you Gay?";
-
-  score.textContent = "No attempts: 0";
-  achievement.textContent = "";
-
-  yesBtn.textContent = "Yes";
-  noBtn.textContent = "No";
-
-  photos.forEach((photo) => {
-    photo.classList.remove("show", "photo-pop");
-  });
-
-  yesBtn.style.left = "28%";
-  yesBtn.style.top = "50%";
-  yesBtn.style.transform = "translate(-50%,-50%)";
-
-  noBtn.style.left = "72%";
-  noBtn.style.top = "50%";
-  noBtn.style.transform = "translate(-50%,-50%)";
+homeBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
 });
