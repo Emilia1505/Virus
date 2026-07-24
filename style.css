@@ -433,12 +433,23 @@ h1 {
   padding: 32px 24px 26px;
 
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.98);
+  background:
+    linear-gradient(
+      145deg,
+      #fff7fb,
+      #ffe7f2
+    );
 
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+
+  border: 1px solid rgba(220, 90, 145, 0.22);
+
+  box-shadow:
+    0 30px 80px rgba(180, 70, 120, 0.18);
+
   text-align: center;
 
-  animation: letterPopIn 280ms ease;
+  animation: letterPopIn 280ms ease,
+  gentleMessagePulse 5s ease-in-out 2s infinite;
 }
 
 .letter-card h1 {
@@ -508,7 +519,177 @@ h1 {
     transform: translateY(0) scale(1);
   }
 }
+
+/* Patch notes */
+
+.patch-page {
+  min-height: 100dvh;
+  padding: 24px 16px 40px;
+  display: block;
+}
+
+.patch-card {
+  width: min(520px, 94vw);
+  margin: 0 auto;
+  padding: 26px 20px 24px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.patch-card > h1 {
+  margin-bottom: 6px;
+}
+
+.patch-version {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.patch-entry {
+  margin-bottom: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 115, 182, 0.14);
+  border-radius: 22px;
+  background: var(--blue-pale);
+}
+
+.patch-entry.old {
+  opacity: 0.78;
+}
+
+.patch-entry h2 {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+}
+
+.patch-date {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.patch-entry ul {
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.patch-entry li + li {
+  margin-top: 4px;
+}
+
+.known-issues {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 115, 182, 0.14);
+}
+
+.known-issues h3 {
+  margin: 0 0 10px;
+  color: var(--blue-dark);
+  font-size: 1rem;
+}
+
+.patch-card > .landing-btn {
+  margin-top: 8px;
+}
+.letter-content {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 24px;
+}
+
+.letter-message {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(220, 90, 145, 0.14);
+  text-align: left;
+}
+
+.letter-message.newest {
+  border: 1px solid rgba(220, 90, 145, 0.38);
+
+  box-shadow:
+    0 8px 24px rgba(220, 90, 145, 0.10);
+}
+
+.letter-message p {
+  margin: 0 0 10px;
+  line-height: 1.55;
+}
+
+.letter-message p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-label {
+  color: #b43b72;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.letter-card .eyebrow {
+  background: #ffdbea;
+  color: #a72f67;
+}
+
+.letter-card .letter-close {
+  background: #ffe3ef;
+  color: #9e3764;
+}
+
+.letter-card .landing-btn.primary {
+  background: #d95791;
+  color: white;
+
+  box-shadow:
+    0 10px 25px rgba(217, 87, 145, 0.28);
+
+  transition:
+    background 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.letter-card .landing-btn.primary:hover {
+  background: #c74680;
+
+  box-shadow:
+    0 13px 30px rgba(217, 87, 145, 0.35);
+}
+
+.letter-card .landing-btn.primary:active {
+  transform: scale(0.97);
+}
+
+@keyframes gentleMessagePulse {
+  0%,
+  88%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 30px 80px rgba(180, 70, 120, 0.18);
+  }
+
+  94% {
+    transform: scale(1.018);
+    box-shadow:
+      0 34px 90px rgba(220, 90, 145, 0.28);
+  }
+}
+
+
 .hidden,
 .letter-overlay.hidden {
   display: none;
+}
+body:has(.patch-page) {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
