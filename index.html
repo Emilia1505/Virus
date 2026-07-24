@@ -98,6 +98,8 @@
   </section>
 </div>
 
+
+
 <script>
   const letterButton =
     document.getElementById("letterButton");
@@ -139,7 +141,64 @@
       closeLetter();
     }
   });
-</script>  
+</script>
+<!-- Tiny train Easter egg -->
+<button
+  class="train-button"
+  id="trainButton"
+  type="button"
+  aria-label="Open train surprise"
+>
+  🚂
+</button>
+
+<div class="train-overlay hidden" id="trainOverlay">
+  <section class="train-card">
+    <button
+      class="train-close"
+      id="trainClose"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <img
+      src="Images/thomas.jpg"
+      alt="Thomas the Tank Engine"
+      class="thomas-image"
+    >
+
+    <p class="train-caption">
+      You found the train.
+    </p>
+  </section>
+</div>
+
+<script>
+  const trainButton = document.getElementById("trainButton");
+  const trainOverlay = document.getElementById("trainOverlay");
+  const trainClose = document.getElementById("trainClose");
+
+  trainButton.addEventListener("click", function () {
+    trainOverlay.classList.remove("hidden");
+  });
+
+  trainClose.addEventListener("click", function () {
+    trainOverlay.classList.add("hidden");
+  });
+
+  trainOverlay.addEventListener("click", function (event) {
+    if (event.target === trainOverlay) {
+      trainOverlay.classList.add("hidden");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
 </body>
 
 </html>
