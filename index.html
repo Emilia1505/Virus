@@ -19,18 +19,47 @@
       <p class="intro">
         Please choose one of the following options.
       </p>
-
-      <div class="landing-actions">
-        <a class="landing-btn primary" href="proposal.html">
-          You know where this leads you
+      
+      <div class="main-menu">
+        <a class="menu-item" href="achievements.html">
+          <span class="menu-icon">🏆</span>
+          <span>
+            <strong>Profile & Achievements</strong>
+            <small>View your questionable accomplishments</small>
+          </span>
+        </a>
+        <a class="menu-item primary-menu" href="proposal.html">
+          <span class="menu-icon">💙</span>
+          <span>
+            <strong>THE Button</strong>
+            <small>You know where this leads you</small>
+          </span>
         </a>
 
-        <a class="landing-btn danger" href="meme.html">
-         Do not press me
+        <a class="menu-item danger-menu" href="meme.html">
+          <span class="menu-icon">⚠️</span>
+          <span>
+            <strong>Do not press me</strong>
+            <small>Access is strongly discouraged</small>
+          </span>
         </a>
 
-        <a class="landing-btn secondary" href="patchnotes.html">
-          Patch Notes
+        <a class="menu-item" href="terminal.html">
+          <span class="menu-icon">📡</span>
+          <span>
+            <strong>Message Terminal</strong>
+            <small>Send a transmission to the developer</small>
+          </span>
+        </a>
+
+        
+
+        <a class="menu-item" href="patchnotes.html">
+          <span class="menu-icon">🛠️</span>
+          <span>
+            <strong>Patch Notes</strong>
+            <small>Inspect recent system updates</small>
+          </span>
         </a>
       </div>
     </section>
@@ -65,26 +94,53 @@
 
     <div class="letter-content">
 
-  <article class="letter-message newest">
+  <!-- Always visible -->
+  <article class="letter-message newest"
+    id="newestMessage">
     <p class="letter-label">New message</p>
 
     <p>
-      YOU ARE REALLY REALLY HOT. 
-      ABSOLUTELY CANNOT WAIT TO BEND YOU OVER. 
-      Also great boobs, awesome body, literally would not 
-      change a thing. 🩷🩷🩷🩷🩷🩷
+      Hallo Lieblings-Mensch,
+      ich mag deine Wurst, weil sie billig und lecker ist.
+      Miss you so much and cannot wait to see you again 🩷🩷🩷
     </p>
   </article>
 
-  <article class="letter-message">
-    <p class="letter-label">Previous message</p>
+  <!-- Archive -->
+  <details class="message-archive">
 
-    <p>I miss you loads.</p>
+    <summary>
+      📂 Previous messages
+      <span class="archive-count">2</span>
+    </summary>
 
-    <p>
-      Hope you love Italy as much as I do. 💙
-    </p>
-  </article>
+    <div class="archived-messages">
+
+      <article class="letter-message archived">
+        <p class="letter-label">Message #2</p>
+
+        <p>
+          YOU ARE REALLY REALLY HOT.
+          ABSOLUTELY CANNOT WAIT TO BEND YOU OVER.
+          Also great boobs, awesome body,
+          literally would not change a thing.
+          🩷🩷🩷🩷🩷🩷
+        </p>
+      </article>
+
+      <article class="letter-message archived">
+        <p class="letter-label">Message #1</p>
+
+        <p>I miss you loads.</p>
+
+        <p>
+          Hope you love Italy as much as I do. 💙
+        </p>
+      </article>
+
+    </div>
+
+  </details>
 
 </div>
 
@@ -116,7 +172,32 @@
   function openLetter() {
     letterOverlay.classList.remove("hidden");
     document.body.classList.add("modal-open");
+    unlockAchievement("mail-reader");
   }
+  const newestMessage =
+    document.getElementById("newestMessage");
+
+  newestMessage.addEventListener("click", () => {
+
+    unlockAchievement("hopeless-romantic");
+
+    newestMessage.classList.add("message-clicked");
+
+});
+newestMessage.addEventListener("click", () => {
+
+    unlockAchievement("hopeless-romantic");
+
+    const heart = document.createElement("span");
+
+    heart.textContent = "🩷";
+    heart.className = "floating-heart";
+
+    newestMessage.appendChild(heart);
+
+    setTimeout(() => heart.remove(),1200);
+
+});
 
   function closeLetter() {
     letterOverlay.classList.add("hidden");
@@ -174,7 +255,7 @@
     </p>
   </section>
 </div>
-
+<script src="achievements.js"></script>
 <script>
   const trainButton = document.getElementById("trainButton");
   const trainOverlay = document.getElementById("trainOverlay");
@@ -182,6 +263,7 @@
 
   trainButton.addEventListener("click", function () {
     trainOverlay.classList.remove("hidden");
+    unlockAchievement("train-spotter");
   });
 
   trainClose.addEventListener("click", function () {
@@ -196,9 +278,4 @@
 </script>
 
 </body>
-</html>
-
-
-</body>
-
 </html>

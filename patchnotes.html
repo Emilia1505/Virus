@@ -9,7 +9,6 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <main class="patch-page">
     <section class="patch-card">
@@ -19,22 +18,20 @@
       <h1>Patch Notes</h1>
 
       <p class="patch-version">
-        Isabelle's corner v1.5
+        Isabelle's corner v1.6
       </p>
 
       <article class="patch-entry">
-        <h2>v1.5: Minor Chaos Update</h2>
+        <h2>v1.6: Big changes</h2>
 
-        <p class="patch-date">24th July 2026</p>
+        <p class="patch-date">8th August 2026</p>
 
         <ul>
-          <li>Added forbidden button despite explicit warnings.</li>
-          <li>Added emergency meme functionality.</li>
-          <li>Added incoming transmissions from the developer.</li>
-          <li>Improved girlfriend acquisition workflow.</li>
-          <li>Reduced probability of selecting “No”.</li>
-          <li>Added Thomas to start our life as trains.</li>
-          <li>Added more memes so my english stays happy</li>
+          <li>New Menu added</li>
+          <li>Achievements unlocked</li>
+          <li>Message Terminal unlocked to communicate with the developer</li>
+          <li>Maybe more hidden things have been added but who knows?</li>
+          <li>More Boobs will be unlocked heheh</li>
         </ul>
 
         <div class="known-issues">
@@ -43,28 +40,41 @@
           <ul>
             <li>German girlfriend cannot be uninstalled.</li>
             <li>No refunds available.</li>
-            <li>Occasional excessive analysing.</li>
             <li>May randomly miss user while user is not within 1 feet.</li>
-            <li>Developer is PMSing really badly</li>
+            <li>Not enough attention during developers day</li>
+            <li>Seriously why arent you texting me during my day???</li>
           </ul>
         </div>
       </article>
 
       <article class="patch-entry old">
-        <h2>v1.0 — Initial Release</h2>
+        <h2>v1.5 — Initial Release</h2>
 
         <ul>
-          <li>Released experimental girlfriend proposal system.</li>
-          <li>Implemented highly unbiased decision architecture.</li>
-          <li>Added technically functional “No” option.</li>
+          <li>Improved girlfriend acquisition workflow.</li>
+          <li>Added Thomas to start our life as trains.</li>
+          <li>Added more memes so my english stays happy<</li>
           <li>Successfully completed first production deployment.</li>
+          <li>Added incoming transmissions from the developer.</li>
         </ul>
       </article>
 
-      <a class="landing-btn primary" href="index.html">
+      <a
+        class="landing-btn primary"
+        href="index.html"
+        id="patchNotesBackBtn"
+      >
         Back to main menu
       </a>
+    <script src="achievements.js"></script>
+    <script>
+      const patchNotesBackBtn =
+        document.getElementById("patchNotesBackBtn");
 
+      patchNotesBackBtn.addEventListener("click", () => {
+        unlockAchievement("patch");
+      });
+    </script>
     </section>
   </main>
 </body>

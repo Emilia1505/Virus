@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="profile-body">
+
+  <main class="profile-page">
+
+    <section class="profile-card">
+
+      <!-- Profile header -->
+      <header class="profile-header">
+        <div class="profile-avatar">I</div>
+
+        <div class="profile-identity">
+          <p class="profile-label">User profile</p>
+
+          <h1>Isabelle</h1>
+
+          <p id="profileLevel">
+            Level 1 New User
+          </p>
+        </div>
+      </header>
+
+      <!-- Achievement progress -->
+      <section class="progress-section">
+        <div class="progress-heading">
+          <div>
+            <p class="section-label">
+              Achievement progress
+            </p>
+
+            <strong id="achievementProgress">
+              Loading...
+            </strong>
+          </div>
+
+          <span
+            class="progress-percent"
+            id="progressPercent"
+          >
+            0%
+          </span>
+        </div>
+
+        <div class="achievement-progress-bar">
+          <div
+            class="achievement-progress-fill"
+            id="achievementProgressFill"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Achievement list -->
+      <section class="achievement-section">
+        <div class="section-heading">
+          <h2>Achievements</h2>
+
+          <span id="unlockedCount">
+            0 unlocked
+          </span>
+        </div>
+
+        <div
+          class="compact-achievement-list"
+          id="achievementList"
+        ></div>
+      </section>
+
+      <!-- Home button -->
+      <a
+        class="landing-btn primary profile-home"
+        href="index.html"
+      >
+        Back to main menu
+      </a>
+
+    </section>
+    <!-- profile-card ends here -->
+
+  </main>
+
+  <script src="achievements.js"></script>
+
+  <script>
+    const achievementList =
+      document.getElementById("achievementList");
+
+    const achievementProgress =
+      document.getElementById("achievementProgress");
+
+    const achievementProgressFill =
+      document.getElementById("achievementProgressFill");
+
+    const progressPercent =
+      document.getElementById("progressPercent");
+
+    const unlockedCount =
+      document.getElementById("unlockedCount");
+
+    const profileLevel =
+      document.getElementById("profileLevel");
+
+    const unlocked = getUnlockedAchievements();
+
+    const unlockedTotal = ACHIEVEMENTS.filter(
+      (achievement) =>
+        unlocked.includes(achievement.id)
+    ).length;
+
+    const totalAchievements = ACHIEVEMENTS.length;
+
+    const percentage = Math.round(
+      (unlockedTotal / totalAchievements) * 100
+    );
+
+    achievementProgress.textContent =
+      `${unlockedTotal} / ${totalAchievements} unlocked`;
+
+    unlockedCount.textContent =
+      `${unlockedTotal} unlocked`;
+
+    progressPercent.textContent =
+      `${percentage}%`;
+
+    achievementProgressFill.style.width =
+      `${percentage}%`;
+
+    if (unlockedTotal >= 10) {
+      profileLevel.textContent =
+        "Level 4 Investigator";
+    } else if (unlockedTotal >= 7) {
+      profileLevel.textContent =
+        "Level 3 Explorer";
+    } else if (unlockedTotal >= 4) {
+      profileLevel.textContent =
+        "Level 2 Curious User";
+    } else {
+      profileLevel.textContent =
+        "Level 1 New User";
+    }
+
+    ACHIEVEMENTS.forEach((achievement) => {
+      const isUnlocked =
+        unlocked.includes(achievement.id);
+
+      const item =
+        document.createElement("article");
+
+      item.className =
+        `compact-achievement ${
+          isUnlocked ? "unlocked" : "locked"
+        }`;
+
+      if (isUnlocked) {
+        item.innerHTML = `
+          <div class="compact-achievement-icon">
+            ${achievement.icon}
+          </div>
+
+          <div class="compact-achievement-text">
+            <h3>${achievement.title}</h3>
+            <p>${achievement.description}</p>
+          </div>
+
+          <span
+            class="achievement-state"
+            aria-label="Unlocked"
+          >
+            ✓
+          </span>
+        `;
+      } else {
+        item.innerHTML = `
+          <div
+            class="compact-achievement-icon locked-icon"
+          >
+            ?
+          </div>
+
+          <div class="compact-achievement-text">
+            <h3>???</h3>
+            <p>Unlock requirement unknown.</p>
+          </div>
+
+          <span
+            class="achievement-state locked-state"
+            aria-label="Locked"
+          >
+            🔒
+          </span>
+        `;
+      }
+
+      achievementList.appendChild(item);
+    });
+  </script>
+
+</body>
+</html>
