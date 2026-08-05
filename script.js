@@ -147,6 +147,9 @@ function moveNoButton() {
   lastMove = now;
 
   noAttempts++;
+  if(noAttempts >= 9){
+    unlockAchievement("persistent");
+  }
 
   const stageRect = buttonStage.getBoundingClientRect();
 
@@ -209,9 +212,13 @@ function moveNoButton() {
 
   updateExtras();
 
+  
+
+
   if(noAttempts >= 9){
 
     yesBtn.style.animation = "pulse .8s";
+    unlockAchievement("persistent");
 
     setTimeout(()=>{
         yesBtn.style.animation = "";

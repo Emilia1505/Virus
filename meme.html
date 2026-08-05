@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Decision Support Tool</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
+<script src="achievements.js"></script>
 
 <body>
   <main class="meme-page">
@@ -18,8 +16,7 @@
     <section class="meme-card hidden" id="memeCard">
       <img
         id="randomMeme"
-        class="meme-image"
-        
+        class="meme-image"  
       >
 
       <p class="meme-caption" id="memeCaption"></p>
@@ -34,6 +31,7 @@
   </main>
 
   <script>
+  
   const sequenceCard = document.getElementById("sequenceCard");
   const sequenceText = document.getElementById("sequenceText");
   const memeCard = document.getElementById("memeCard");
@@ -94,6 +92,8 @@ document.getElementById("memeCaption").textContent =
   setTimeout(() => {
     sequenceCard.classList.add("hidden");
     memeCard.classList.remove("hidden");
+
+    unlockAchievement("forbidden-button");
   }, 4000);
 </script>
 </body>
