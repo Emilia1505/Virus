@@ -98,6 +98,7 @@
 <script>
   const form = document.getElementById("messageForm");
   const message = document.getElementById("message");
+  const category = document.getElementById("category");
   const characterCount = document.getElementById("characterCount");
   const successMessage = document.getElementById("successMessage");
   const formError = document.getElementById("formError");
@@ -112,13 +113,12 @@
     const submitButton =
       form.querySelector('button[type="submit"]');
 
+    const selectedCategory = category.value;
+
     submitButton.disabled = true;
     submitButton.textContent = "Encrypting...";
 
     formError.classList.add("hidden");
-    if (selectedCategory === "Emergency affection request") {
-     unlockAchievement("affection-required");
-    }
 
     try {
       const response = await fetch(form.action, {
@@ -138,6 +138,14 @@
 
       unlockAchievement("mail-time");
 
+      if (selectedCategory === "Emergency affection request") {
+        unlockAchievement("affection-required");
+      }
+
+      if (selectedCategory === "Girlfriend complaint") {
+        unlockAchievement("formal-complaint");
+      }
+
       const transmissionCount =
         incrementStatistic("transmissionCount");
 
@@ -153,7 +161,6 @@
       console.error(error);
     }
   });
-
 </script>
 </body>
 </html>
