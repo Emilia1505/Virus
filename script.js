@@ -150,6 +150,9 @@ function moveNoButton() {
   if(noAttempts >= 9){
     unlockAchievement("persistent");
   }
+  if (noAttempts === 69) {
+  unlockAchievement("nice");
+  }
 
   const stageRect = buttonStage.getBoundingClientRect();
 

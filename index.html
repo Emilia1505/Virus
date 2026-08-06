@@ -154,75 +154,6 @@
   </section>
 </div>
 
-
-
-<script>
-  const letterButton =
-    document.getElementById("letterButton");
-
-  const letterOverlay =
-    document.getElementById("letterOverlay");
-
-  const letterClose =
-    document.getElementById("letterClose");
-
-  const letterCloseButton =
-    document.getElementById("letterCloseButton");
-
-  function openLetter() {
-    letterOverlay.classList.remove("hidden");
-    document.body.classList.add("modal-open");
-    unlockAchievement("mail-reader");
-  }
-  const newestMessage =
-    document.getElementById("newestMessage");
-
-  newestMessage.addEventListener("click", () => {
-
-    unlockAchievement("hopeless-romantic");
-
-    newestMessage.classList.add("message-clicked");
-
-});
-newestMessage.addEventListener("click", () => {
-
-    unlockAchievement("hopeless-romantic");
-
-    const heart = document.createElement("span");
-
-    heart.textContent = "🩷";
-    heart.className = "floating-heart";
-
-    newestMessage.appendChild(heart);
-
-    setTimeout(() => heart.remove(),1200);
-
-});
-
-  function closeLetter() {
-    letterOverlay.classList.add("hidden");
-    document.body.classList.remove("modal-open");
-  }
-
-  letterButton.addEventListener("click", openLetter);
-  letterClose.addEventListener("click", closeLetter);
-  letterCloseButton.addEventListener("click", closeLetter);
-
-  letterOverlay.addEventListener("click", (event) => {
-    if (event.target === letterOverlay) {
-      closeLetter();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key === "Escape" &&
-      !letterOverlay.classList.contains("hidden")
-    ) {
-      closeLetter();
-    }
-  });
-</script>
 <!-- Tiny train Easter egg -->
 <button
   class="train-button"
@@ -255,27 +186,160 @@ newestMessage.addEventListener("click", () => {
     </p>
   </section>
 </div>
-<script src="achievements.js"></script>
-<script>
-  const trainButton = document.getElementById("trainButton");
-  const trainOverlay = document.getElementById("trainOverlay");
-  const trainClose = document.getElementById("trainClose");
 
-  trainButton.addEventListener("click", function () {
+<!-- Hidden cherry button -->
+<button
+  class="secret-button"
+  id="secretButton"
+  type="button"
+  aria-label="Secret"
+></button>
+
+<div class="cherry-layer" id="cherryLayer"></div>
+
+<!-- Load shared achievement functions once -->
+<script src="achievements.js"></script>
+
+<script>
+  /* Letter */
+
+  const letterButton =
+    document.getElementById("letterButton");
+
+  const letterOverlay =
+    document.getElementById("letterOverlay");
+
+  const letterClose =
+    document.getElementById("letterClose");
+
+  const letterCloseButton =
+    document.getElementById("letterCloseButton");
+
+  const newestMessage =
+    document.getElementById("newestMessage");
+
+  function openLetter() {
+    letterOverlay.classList.remove("hidden");
+    document.body.classList.add("modal-open");
+
+    unlockAchievement("mail-reader");
+  }
+
+  function closeLetter() {
+    letterOverlay.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  }
+
+  letterButton.addEventListener("click", openLetter);
+  letterClose.addEventListener("click", closeLetter);
+  letterCloseButton.addEventListener("click", closeLetter);
+
+  letterOverlay.addEventListener("click", (event) => {
+    if (event.target === letterOverlay) {
+      closeLetter();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      !letterOverlay.classList.contains("hidden")
+    ) {
+      closeLetter();
+    }
+  });
+
+  newestMessage.addEventListener("click", () => {
+    unlockAchievement("hopeless-romantic");
+
+    newestMessage.classList.remove("message-clicked");
+
+    /* Restart the animation if she clicks repeatedly */
+    void newestMessage.offsetWidth;
+
+    newestMessage.classList.add("message-clicked");
+
+    const heart = document.createElement("span");
+
+    heart.textContent = "🩷";
+    heart.className = "floating-heart";
+
+    newestMessage.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 1200);
+  });
+
+
+  /* Train */
+
+  const trainButton =
+    document.getElementById("trainButton");
+
+  const trainOverlay =
+    document.getElementById("trainOverlay");
+
+  const trainClose =
+    document.getElementById("trainClose");
+
+  trainButton.addEventListener("click", () => {
     trainOverlay.classList.remove("hidden");
+
     unlockAchievement("train-spotter");
   });
 
-  trainClose.addEventListener("click", function () {
+  trainClose.addEventListener("click", () => {
     trainOverlay.classList.add("hidden");
   });
 
-  trainOverlay.addEventListener("click", function (event) {
+  trainOverlay.addEventListener("click", (event) => {
     if (event.target === trainOverlay) {
       trainOverlay.classList.add("hidden");
     }
   });
-</script>
 
+
+  /* Secret cherry button */
+
+  const secretButton =
+    document.getElementById("secretButton");
+
+  const cherryLayer =
+    document.getElementById("cherryLayer");
+
+  secretButton.addEventListener("click", () => {
+    unlockAchievement("secret-finder");
+    launchCherries();
+  });
+
+  function launchCherries() {
+    for (let i = 0; i < 35; i++) {
+      const cherry = document.createElement("span");
+
+      cherry.className = "falling-cherry";
+      cherry.textContent = "🍒";
+
+      cherry.style.left =
+        `${Math.random() * 100}%`;
+
+      cherry.style.animationDelay =
+        `${Math.random() * 0.7}s`;
+
+      cherry.style.animationDuration =
+        `${1.8 + Math.random() * 1.5}s`;
+
+      cherry.style.fontSize =
+        `${18 + Math.random() * 18}px`;
+
+      cherryLayer.appendChild(cherry);
+
+      setTimeout(() => {
+        cherry.remove();
+      }, 4000);
+    }
+  }
+</script>
 </body>
 </html>
+

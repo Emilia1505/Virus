@@ -57,11 +57,30 @@ const ACHIEVEMENTS = [
     description: "Clicked on the newest message because one read wasn't enough."
   },
   {
-    id: "classified",
-    icon: "❓",
-    title: "???",
-    description: "Unlock requirements unknown."
-  }
+  id: "nice",
+  icon: "😏",
+  title: "Uh lala.",
+  description: "Attempted to press No exactly 69 times. Prepare for a railing ♋"
+},
+{
+  id: "secret-finder",
+  icon: "🕵️‍♀️",
+  title: "Detective",
+  description: "Found something that was definitely not meant to be found."
+},
+{
+  id: "frequent-transmitter",
+  icon: "📡",
+  title: "Excellent communicator",
+  description: "Sent five transmissions to the developer. I appreciate it, love how engaged you are <3"
+},
+{
+  id: "affection-required",
+  icon: "🫂",
+  title: "Affection Required",
+  description: "Submitted an emergency affection request. I am sorry I cannot fullfil your needs, feel yourself hugged and snogged."
+},
+
 ];
 
 function getUnlockedAchievements() {
@@ -103,3 +122,14 @@ function isAchievementUnlocked(id) {
   return getUnlockedAchievements().includes(id);
 }
 
+function getStatistic(key) {
+  return Number(localStorage.getItem(key) || 0);
+}
+
+function incrementStatistic(key) {
+  const newValue = getStatistic(key) + 1;
+
+  localStorage.setItem(key, String(newValue));
+
+  return newValue;
+}
