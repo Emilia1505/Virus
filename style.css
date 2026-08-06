@@ -467,19 +467,13 @@ h1 {
 
   overflow: hidden;
 }
-
 .letter-content {
-  flex: 1 1 auto;
-  min-height: 0;
-
   display: grid;
+  gap: 14px;
 
   margin: 22px 0 18px;
-  padding-right: 6px;
 
-  overflow-y: visible;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
   max-height: none;
 }
 .letter-card > .eyebrow,
@@ -658,22 +652,6 @@ flex-shrink:0;
     background:transparent;
 }
 
-.message-archive[open] .archived-messages{
-    animation: archiveReveal .25s ease;
-}
-
-@keyframes archiveReveal{
-
-    from{
-        opacity:0;
-        transform:translateY(-6px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
 
 .letter-message {
   padding: 16px;
@@ -1354,48 +1332,45 @@ flex-shrink:0;
 }
 /* Collapsible message archive */
 
-.message-archive {
-  overflow: hidden;
+
+
+.message-archive-link {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 16px;
 
   border: 1px solid rgba(220, 90, 145, 0.2);
   border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.message-archive summary {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 14px 16px;
-
+  background: rgba(255, 255, 255, 0.58);
   color: #a72f67;
-  font-size: 0.88rem;
+
+  font-size: 0.9rem;
   font-weight: 800;
+  text-align: left;
+  text-decoration: none;
 
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.message-archive summary::-webkit-details-marker {
-  display: none;
+.message-archive-link:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 9px 24px rgba(220, 90, 145, 0.12);
 }
 
-.message-archive summary::after {
-  content: "⌄";
-  margin-left: auto;
-  transition: transform 180ms ease;
-}
-
-.message-archive[open] summary::after {
-  transform: rotate(180deg);
+.message-archive-link:active {
+  transform: scale(0.98);
 }
 
 .archive-count {
-  min-width: 23px;
-  height: 23px;
+  min-width: 24px;
+  height: 24px;
 
   display: inline-grid;
   place-items: center;
@@ -1410,22 +1385,9 @@ flex-shrink:0;
   font-weight: 850;
 }
 
-.archived-messages {
-  display: grid;
-  gap: 12px;
-
-  max-height: 220px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  padding: 0 12px 12px;
-
-  touch-action: pan-y;
-  overscroll-behavior: contain;
-}
-
-.message-archive[open] .archived-messages {
-  animation: archiveReveal 250ms ease;
+.archive-arrow {
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 @keyframes archiveReveal {
@@ -1631,4 +1593,154 @@ body:has(.patch-page) {
       rotate(540deg)
       scale(1.15);
   }
+}
+/* Dedicated message archive */
+
+.messages-body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.messages-page {
+  width: 100%;
+  min-height: 100dvh;
+  padding: 22px 14px 38px;
+}
+
+.messages-card {
+  width: min(430px, 94vw);
+  margin: 0 auto;
+  padding: 26px 20px 22px;
+
+  border: 1px solid rgba(220, 90, 145, 0.18);
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff7fb,
+      #ffe7f2
+    );
+
+  box-shadow:
+    0 20px 55px rgba(180, 70, 120, 0.16);
+}
+
+.messages-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.messages-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 8vw, 2.35rem);
+}
+
+.messages-total {
+  flex-shrink: 0;
+
+  margin-bottom: 5px;
+
+  color: #a72f67;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.messages-list {
+  display: grid;
+  gap: 12px;
+}
+
+.saved-message {
+  overflow: hidden;
+
+  border: 1px solid rgba(220, 90, 145, 0.18);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.saved-message summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+
+  padding: 15px 16px;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.saved-message summary::-webkit-details-marker {
+  display: none;
+}
+
+.saved-message-label {
+  margin: 0 0 4px;
+
+  color: #b43b72;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.saved-message-preview {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.saved-message-arrow {
+  color: #a72f67;
+  font-size: 1.1rem;
+
+  transition: transform 180ms ease;
+}
+
+.saved-message[open] .saved-message-arrow {
+  transform: rotate(180deg);
+}
+
+.saved-message-body {
+  padding: 0 16px 17px;
+
+  color: var(--text);
+  font-size: 0.96rem;
+  line-height: 1.6;
+
+  animation: archiveReveal 220ms ease;
+}
+
+.saved-message-body p {
+  margin: 0 0 12px;
+}
+
+.saved-message-body p:last-child {
+  margin-bottom: 0;
+}
+
+.messages-home {
+  position: static;
+  margin-top: 20px;
+
+  background: #d95791 !important;
+
+  box-shadow:
+    0 10px 25px rgba(217, 87, 145, 0.28) !important;
+}
+
+.messages-home:hover {
+  background: #c74680 !important;
 }

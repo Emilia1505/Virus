@@ -116,6 +116,9 @@
     submitButton.textContent = "Encrypting...";
 
     formError.classList.add("hidden");
+    if (selectedCategory === "Emergency affection request") {
+     unlockAchievement("affection-required");
+    }
 
     try {
       const response = await fetch(form.action, {
@@ -150,9 +153,7 @@
       console.error(error);
     }
   });
-if (selectedCategory === "Emergency affection request") {
-  unlockAchievement("affection-required");
-}
+
 </script>
 </body>
 </html>
