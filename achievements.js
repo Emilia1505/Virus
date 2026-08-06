@@ -78,13 +78,19 @@ const ACHIEVEMENTS = [
   id: "affection-required",
   icon: "🫂",
   title: "Affection Required",
-  description: "Submitted an emergency affection request. I am sorry I cannot fullfil your needs, feel yourself hugged and snogged."
+  description: "Submitted an emergency affection request. I am sorry feel yourself hugged and snogged."
 },
 {
   id: "message-archaeologist",
   icon: "📂",
   title: "Message Archaeologist",
   description: "Explored the message archive"
+},
+{
+  id: "formal-complaint",
+  icon: "📋",
+  title: "Formal Complaint",
+  description: "Submitted an official girlfriend complaint. Why you do this to me? :((((( what have I done."
 },
 
 ];
