@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Messages — Isabelle's Corner</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="messages-body">
+
+  <main class="messages-page">
+
+    <section class="messages-card">
+
+      <header class="messages-header">
+        <div>
+          <p class="eyebrow">Message archive</p>
+          <h1>Previous messages</h1>
+        </div>
+
+        <span class="messages-total">2 saved</span>
+      </header>
+
+      <div class="messages-list">
+
+        <details class="saved-message">
+          <summary>
+            <div>
+              <p class="saved-message-label">Message #2</p>
+              <p class="saved-message-preview">
+                You are really, really hot...
+              </p>
+            </div>
+
+            <span class="saved-message-arrow">⌄</span>
+          </summary>
+
+          <div class="saved-message-body">
+            <p>
+              YOU ARE REALLY REALLY HOT.
+              ABSOLUTELY CANNOT WAIT TO BEND YOU OVER.
+              Also great boobs, awesome body,
+              literally would not change a thing.
+              🩷🩷🩷🩷🩷🩷
+            </p>
+          </div>
+        </details>
+
+        <details class="saved-message">
+          <summary>
+            <div>
+              <p class="saved-message-label">Message #1</p>
+              <p class="saved-message-preview">
+                I miss you loads...
+              </p>
+            </div>
+
+            <span class="saved-message-arrow">⌄</span>
+          </summary>
+
+          <div class="saved-message-body">
+            <p>I miss you loads.</p>
+
+            <p>
+              Hope you love Italy as much as I do. 💙
+            </p>
+          </div>
+        </details>
+
+      </div>
+
+      <a class="landing-btn primary messages-home" href="index.html">
+        Back to main menu
+      </a>
+
+    </section>
+
+  </main>
+
+  <script src="achievements.js"></script>
+
+  <script>
+    const savedMessages =
+      document.querySelectorAll(".saved-message");
+
+    savedMessages.forEach((message) => {
+      message.addEventListener("toggle", () => {
+        if (message.open) {
+          unlockAchievement("message-archaeologist");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -80,6 +80,12 @@ const ACHIEVEMENTS = [
   title: "Affection Required",
   description: "Submitted an emergency affection request. I am sorry I cannot fullfil your needs, feel yourself hugged and snogged."
 },
+{
+  id: "message-archaeologist",
+  icon: "📂",
+  title: "Message Archaeologist",
+  description: "Explored the message archive"
+},
 
 ];
 
