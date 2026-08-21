@@ -82,6 +82,37 @@
           Return to main menu
         </a>
       </section>
+      <section class="terminal-thomas hidden" id="terminalThomas">
+        <p class="thomas-alert"> 🚨 TRANSMISSION INTERCEPTED</p>
+
+        <img src="Images/thomas.jpg" alt="Thomas has intercepted the transmission" class="terminal-thomas-image">
+
+        <h2>Communications Network</h2>
+
+          <p>
+            Your transmission has been inspected by Thomas.
+        </p>
+
+        <p class="thomas-small">
+          Would you still like me if I were a train?
+        </p>
+
+        <p
+          class="thomas-delivery hidden"
+          id="thomasDelivery"
+        >
+          ✓ Transmission eventually delivered to German girlfriend.
+        </p>
+
+        <a
+          class="landing-btn primary hidden"
+          id="thomasReturn"
+          href="index.html"
+        >
+          Return to main menu
+        </a>
+      </section>
+            
 
       <p class="form-error hidden" id="formError">
         Transmission failed. Please try again.
@@ -102,6 +133,9 @@
   const characterCount = document.getElementById("characterCount");
   const successMessage = document.getElementById("successMessage");
   const formError = document.getElementById("formError");
+  const terminalThomas = document.getElementById("terminalThomas");
+  const thomasDelivery = document.getElementById("thomasDelivery");
+  const thomasReturn = document.getElementById("thomasReturn");
 
   message.addEventListener("input", () => {
     characterCount.textContent = message.value.length;
@@ -132,11 +166,21 @@
       if (!response.ok) {
         throw new Error("Transmission failed");
       }
-
+      
       form.classList.add("hidden");
-      successMessage.classList.remove("hidden");
 
-      unlockAchievement("mail-time");
+      /*
+      * Thomas has an 8% chance of intercepting
+      * a successfully delivered transmission.
+      */
+      const thomasIntercepted =
+        Math.random() < 0.08 ;
+
+      if (thomasIntercepted) {
+        triggerTerminalThomas();
+      } else {
+        successMessage.classList.remove("hidden");
+      }
 
       if (selectedCategory === "Emergency affection request") {
         unlockAchievement("affection-required");
@@ -160,7 +204,26 @@
 
       console.error(error);
     }
+
   });
+  function triggerTerminalThomas() {
+  terminalThomas.classList.remove("hidden");
+
+  unlockAchievement("Interrupt");
+
+
+  /*
+   * Thomas requires several seconds to perform
+   * his completely unnecessary inspection.
+   */
+  setTimeout(() => {
+    thomasDelivery.classList.remove("hidden");
+  }, 2500);
+
+  setTimeout(() => {
+    thomasReturn.classList.remove("hidden");
+  }, 3200);
+  }
 </script>
 </body>
 </html>

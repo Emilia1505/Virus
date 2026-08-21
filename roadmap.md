@@ -82,3 +82,14 @@ A small, evolving website for Bella.
 - New-update indicator
 - Konami code
 - Anniversary update
+
+🎰 Mystery Button — once per day it produces something: compliment, mission, stupid fact, photo, date idea, "nothing happened", etc. You can't reroll it until tomorrow.
+💌 Compliment Generator — mostly genuine compliments, with occasional nonsense like "Your girlfriend has reviewed the available data and confirms that your butt remains excellent."
+📸 Memory Vault — little photos/memories with dates. Random button: “Retrieve memory”. This could become genuinely lovely after a year.
+📊 Relationship Statistics — completely unserious fake statistics: Girlfriend acquisition: successful, Complaints submitted: 7, No button attempts: 69, Trains discovered: 1, Messages sent: 14, Current compatibility: suspiciously high.
+🗳️ Polls — you add a question like “What should we do when I arrive?” and she can vote. Harder because storing her answer requires something beyond localStorage if you want to see it, but you already have Formspree as an easy workaround.
+🎁 Locked surprises — cards saying CLASSIFIED — Available 24 December. JS checks the date and unlocks it automatically. Great for birthdays, Christmas, visits, anniversaries, etc.
+🧭 Adventure Generator — slightly different from dates: "Get on the next train. Travel 4 stops. Get off. Find coffee." / "Walk for 20 minutes. At every intersection, alternate who chooses the direction."
+🚨 Emergency Button — labelled something dramatic like “EMERGENCY PROTOCOL”, then options such as Sad, Miss Emilia, Bored, Need affection, and each produces a different little response.
+🔮 Relationship Oracle — asks a ridiculous question and produces authoritative answers like “Analysis complete: German girlfriend is correct. Confidence interval: 100%.”
+📰 Isabelle's Corner News — tiny fake release/news posts: “BREAKING: Local woman completes all 15 achievements considerably faster than developer anticipated.”

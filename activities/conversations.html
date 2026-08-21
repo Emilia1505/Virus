@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Talk to Me</title>
+
+  <link
+    rel="stylesheet"
+    href="conversations.css"
+  >
+</head>
+
+<body>
+
+<main class="conversation-page">
+
+  <section class="conversation-card">
+
+    <p class="eyebrow">
+      Conversation Department
+    </p>
+
+    <h1>Talk to me 💬</h1>
+
+    <p class="intro">
+      Select the approximate level of emotional competence.
+    </p>
+
+    <div class="topic-filters">
+
+      <button data-category="Any" class="active">
+        Anything
+      </button>
+
+      <button data-category="Us">
+        💙 Us
+      </button>
+
+      <button data-category="Questionable">
+        😂 Questionable
+      </button>
+
+      <button data-category="Curious">
+        🧠 Curious
+      </button>
+
+      <button data-category="Deep-ish">
+        🌱 Deep-ish
+      </button>
+
+      <button data-category="Childhood">
+        🧸 Childhood
+      </button>
+
+      <button data-category="Memories">
+        📸 Memories
+      </button>
+
+      <button data-category="Future">
+        🔮 Future
+      </button>
+
+    </div>
+
+    <section
+      class="question-result hidden"
+      id="questionResult"
+    >
+
+      <div
+        class="question-emoji"
+        id="questionEmoji"
+      ></div>
+
+      <p
+        class="question-category"
+        id="questionCategory"
+      ></p>
+
+      <h2 id="questionText"></h2>
+
+    </section>
+
+    <button
+      class="conversation-button"
+      id="questionButton"
+      type="button"
+    >
+      🎲 Give us a question
+    </button>
+
+    <a
+      class="back-link"
+      href="activities.html"
+    >
+      ← Activities
+    </a>
+
+  </section>
+
+</main>
+
+<script src="../achievements.js"></script>
+<script src="activities-data.js"></script>
+<script src="conversations.js"></script>
+
+</body>
+</html>

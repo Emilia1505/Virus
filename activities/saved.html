@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Saved Dates</title>
+
+  <link rel="stylesheet" href="dates.css">
+</head>
+
+<body>
+
+<main class="date-page">
+
+  <section class="date-card">
+
+    <p class="eyebrow">
+      Relationship Archives
+    </p>
+
+    <h1>Saved Dates ❤️</h1>
+
+    <p class="intro">
+      Activities deemed acceptable for future operations.
+    </p>
+
+
+    <!-- Saved dates get inserted here -->
+    <div
+      class="saved-date-list"
+      id="savedDateList"
+    ></div>
+
+
+    <!-- Appears when nothing is saved -->
+    <section
+      class="saved-empty hidden"
+      id="savedEmpty"
+    >
+      <div class="date-emoji">
+        🫥
+      </div>
+
+      <h2>Nothing here.</h2>
+
+      <p>
+        Apparently no date has met your standards yet.
+      </p>
+    </section>
+
+
+    <nav class="bottom-nav">
+
+      <a href="dates.html">
+        🎲 Date Generator
+      </a>
+
+      <a href="activities.html">
+        ← Activities
+      </a>
+
+    </nav>
+
+  </section>
+
+</main>
+
+
+<script src="activities-data.js"></script>
+<script src="saved.js"></script>
+
+</body>
+</html>

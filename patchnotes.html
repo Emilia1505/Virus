@@ -18,20 +18,20 @@
       <h1>Patch Notes</h1>
 
       <p class="patch-version">
-        Isabelle's corner v1.6
+        Isabelle's corner v1.7
       </p>
 
       <article class="patch-entry">
-        <h2>v1.6: Big changes</h2>
+        <h2>v1.7: Reunion time</h2>
 
-        <p class="patch-date">8th August 2026</p>
+        <p class="patch-date">21th August 2026</p>
 
         <ul>
-          <li>New Menu added</li>
-          <li>Achievements unlocked</li>
-          <li>Message Terminal unlocked to communicate with the developer</li>
-          <li>Maybe more hidden things have been added but who knows?</li>
-          <li>More Boobs will be unlocked heheh</li>
+          <li>New Menu item added</li>
+          <li>MORE achievements because you are too smart</li>
+          <li>secret things added :PPPP</li>
+          <li>New challenges added too</li>
+          <li>Be aware of weird things happening eventually</li>
         </ul>
 
         <div class="known-issues">
@@ -40,22 +40,23 @@
           <ul>
             <li>German girlfriend cannot be uninstalled.</li>
             <li>No refunds available.</li>
-            <li>May randomly miss user while user is not within 1 feet.</li>
-            <li>Not enough attention during developers day</li>
+            <li>May stalk users flight at all times (except when asleep)</li>
+            <li> Still not enough attention during developers day</li>
             <li>Seriously why arent you texting me during my day???</li>
+            <li>You too sexy omg.</li>
           </ul>
         </div>
       </article>
 
       <article class="patch-entry old">
-        <h2>v1.5 — Initial Release</h2>
+        <h2>v1.6 — Big Changes</h2>
 
         <ul>
-          <li>Improved girlfriend acquisition workflow.</li>
-          <li>Added Thomas to start our life as trains.</li>
-          <li>Added more memes so my english stays happy<</li>
-          <li>Successfully completed first production deployment.</li>
-          <li>Added incoming transmissions from the developer.</li>
+          <li>New Menu added</li>
+          <li>Achievements unlocked</li>
+          <li>Message Terminal unlocked to communicate with the developer</li>
+          <li>Maybe more hidden things have been added but who knows?</li>
+          <li>More Boobs will be unlocked heheh</li>
         </ul>
       </article>
 
@@ -77,5 +78,62 @@
     </script>
     </section>
   </main>
+  <!-- Absolutely normal patch notes railway infrastructure -->
+<div
+  class="patch-thomas hidden"
+  id="patchThomas"
+  aria-hidden="true"
+>
+  <img
+    src="Images/thomas.jpg"
+    alt=""
+    class="patch-thomas-image"
+  >
+</div>
+
+<script>
+  const patchThomas =
+    document.getElementById("patchThomas");
+
+  /*
+   * Unscheduled railway activity.
+   * No further information available.
+   */
+  const alreadyFoundThomas =
+  isAchievementUnlocked("patch-notes-express");
+
+  const patchThomasChance =
+  alreadyFoundThomas ? 0.12 : 0.3;
+  if (Math.random() < patchThomasChance) {
+    setTimeout(() => {
+      runPatchThomas();
+    }, 1800);
+  }
+
+  function runPatchThomas() {
+    patchThomas.classList.remove("hidden");
+
+    /*
+     * Restart animation if necessary.
+     */
+    patchThomas.classList.remove("patch-thomas-driving");
+    void patchThomas.offsetWidth;
+    patchThomas.classList.add("patch-thomas-driving");
+
+    unlockAchievement("patch-notes-express");
+
+    if (typeof checkThomasAchievements === "function") {
+      checkThomasAchievements();
+    }
+
+    setTimeout(() => {
+      patchThomas.classList.remove(
+        "patch-thomas-driving"
+      );
+
+      patchThomas.classList.add("hidden");
+    }, 4500);
+  }
+</script>
 </body>
 </html>
