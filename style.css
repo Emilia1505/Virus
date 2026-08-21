@@ -1744,3 +1744,662 @@ body:has(.patch-page) {
 .messages-home:hover {
   background: #c74680 !important;
 }
+
+/* ========================================
+   ACTIVITIES
+   ======================================== */
+
+.activities-body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.activities-page {
+  min-height: 100dvh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 22px 14px 38px;
+}
+
+.activities-card {
+  width: min(410px, 94vw);
+
+  padding: 28px 20px 24px;
+
+  border-radius: 30px;
+
+  background: rgba(255,255,255,.98);
+
+  box-shadow:
+    0 24px 65px rgba(0,0,0,.13);
+
+  text-align: center;
+}
+
+.activity-selection {
+  display: grid;
+  gap: 12px;
+
+  margin-top: 24px;
+}
+
+.activity-option {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px;
+
+  border: 1px solid rgba(0,115,182,.14);
+  border-radius: 18px;
+
+  background: var(--blue-pale);
+
+  color: var(--text);
+
+  font-family: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.activity-option:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(0,115,182,.12);
+}
+
+.activity-option:active {
+  transform: scale(.98);
+}
+
+.activity-icon {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+
+  background: white;
+
+  font-size: 1.35rem;
+}
+
+.activity-option strong,
+.activity-option small {
+  display: block;
+}
+
+.activity-option strong {
+  font-size: .96rem;
+}
+
+.activity-option small {
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: .78rem;
+}
+
+.activity-result {
+  margin-top: 22px;
+}
+
+.activity-type {
+  color: var(--blue-dark);
+
+  font-size: .72rem;
+  font-weight: 900;
+
+  letter-spacing: .08em;
+}
+
+.activity-result-icon {
+  margin: 14px 0 10px;
+
+  font-size: 3rem;
+}
+
+.activity-result h2 {
+  margin-bottom: 10px;
+}
+
+.activity-description {
+  color: var(--muted);
+
+  line-height: 1.55;
+}
+
+.activity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 16px;
+}
+
+.activity-tags span {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: var(--blue-soft);
+
+  color: var(--blue-dark);
+
+  font-size: .72rem;
+  font-weight: 750;
+}
+
+.bonus-objective {
+  margin-top: 18px;
+
+  padding: 14px;
+
+  border: 1px solid rgba(220,90,145,.2);
+  border-radius: 16px;
+
+  background: #fff2f7;
+
+  text-align: left;
+}
+
+.bonus-objective > span {
+  color: #b43b72;
+
+  font-size: .68rem;
+  font-weight: 900;
+
+  letter-spacing: .06em;
+}
+
+.bonus-objective p {
+  margin: 6px 0 0;
+
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+.activity-actions {
+  display: grid;
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.activity-actions .landing-btn {
+  position: static;
+}
+
+.activity-accepted,
+.activity-completed {
+  margin-top: 24px;
+}
+
+.accepted-icon,
+.completed-icon {
+  width: 64px;
+  height: 64px;
+
+  margin: 0 auto 16px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--blue);
+
+  color: white;
+
+  font-size: 1.8rem;
+}
+
+.activity-accepted p,
+.activity-completed p {
+  margin: 10px 0;
+
+  color: var(--muted);
+
+  line-height: 1.5;
+}
+
+.activity-accepted small {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: var(--muted);
+}
+
+.activity-accepted .landing-btn,
+.activity-completed .landing-btn {
+  position: static;
+
+  margin-top: 9px;
+}
+
+.activity-statistics {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+
+  margin-top: 24px;
+  padding-top: 16px;
+
+  border-top:
+    1px solid rgba(0,115,182,.12);
+
+  color: var(--muted);
+
+  font-size: .76rem;
+}
+
+.activity-statistics strong {
+  color: var(--blue-dark);
+}
+
+
+/* ========================================
+   THOMAS INTERVENTION
+   ======================================== */
+
+.thomas-event {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: rgba(245,251,254,.97);
+
+  text-align: center;
+}
+
+.thomas-warning {
+  padding: 20px;
+
+  transition:
+    opacity 300ms ease;
+}
+
+.thomas-warning p {
+  color: #b83333;
+
+  font-size: .75rem;
+  font-weight: 900;
+
+  letter-spacing: .08em;
+}
+
+.thomas-warning h2 {
+  margin-top: 8px;
+}
+
+.activity-thomas {
+  position: absolute;
+
+  width: min(260px, 60vw);
+
+  left: -300px;
+  bottom: 22%;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,.2);
+}
+
+.thomas-driving .activity-thomas {
+  animation:
+    thomasDrive 2.5s linear forwards;
+}
+
+.thomas-driving .thomas-warning {
+  opacity: .35;
+}
+
+@keyframes thomasDrive {
+  from {
+    left: -300px;
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+
+  to {
+    left: calc(100vw + 300px);
+    transform: rotate(-2deg);
+  }
+}
+/* ========================================
+   TERMINAL THOMAS INTERCEPTION
+   ======================================== */
+
+.terminal-thomas {
+  margin-top: 12px;
+  text-align: center;
+
+  animation: terminalThomasAppear
+    350ms ease;
+}
+
+.thomas-alert {
+  margin-bottom: 16px;
+
+  color: #b83333;
+
+  font-size: 0.72rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+}
+
+.terminal-thomas-image {
+  display: block;
+
+  width: min(220px, 75%);
+  max-height: 230px;
+
+  margin: 0 auto 18px;
+
+  object-fit: contain;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.16);
+
+  animation:
+    terminalThomasInspection
+    2.2s ease-in-out infinite;
+}
+
+.terminal-thomas h2 {
+  margin-bottom: 10px;
+}
+
+.terminal-thomas > p:not(.thomas-alert) {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.thomas-small {
+  margin-top: 6px;
+
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+.thomas-delivery {
+  margin: 18px 0 !important;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  background: var(--blue-pale);
+
+  color: var(--blue-dark) !important;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  animation:
+    thomasDeliveryAppear
+    350ms ease;
+}
+
+#thomasReturn {
+  position: static;
+  margin-top: 14px;
+}
+
+
+@keyframes terminalThomasAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes terminalThomasInspection {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+
+  50% {
+    transform: rotate(1deg) scale(1.02);
+  }
+}
+
+
+@keyframes thomasDeliveryAppear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ========================================
+   TOTALLY NORMAL PATCH NOTE TRAIN
+   ======================================== */
+
+.patch-thomas {
+  position: fixed;
+
+  left: 0;
+  bottom: 12px;
+
+  width: 100%;
+
+  z-index: 500;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+.patch-thomas-image {
+  position: relative;
+
+  display: block;
+
+  width: 75px;
+  height: 75px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.18);
+
+  transform: translateX(-100px);
+}
+
+.patch-thomas-driving .patch-thomas-image {
+  animation:
+    patchThomasDrive
+    4s linear forwards;
+}
+
+@keyframes patchThomasDrive {
+  from {
+    transform:
+      translateX(-100px)
+      rotate(-3deg);
+  }
+
+  25% {
+    transform:
+      translateX(25vw)
+      rotate(2deg);
+  }
+
+  50% {
+    transform:
+      translateX(50vw)
+      rotate(-2deg);
+  }
+
+  75% {
+    transform:
+      translateX(75vw)
+      rotate(2deg);
+  }
+
+  to {
+    transform:
+      translateX(calc(100vw + 100px))
+      rotate(-3deg);
+  }
+}
+/* ========================================
+   THOMAS ACHIEVEMENT INSPECTOR
+   ======================================== */
+
+.achievement-thomas {
+  position: fixed;
+
+  right: -120px;
+  bottom: 22px;
+
+  z-index: 800;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  pointer-events: none;
+}
+
+.achievement-thomas-image {
+  width: 75px;
+  height: 75px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-thomas-bubble {
+  position: relative;
+
+  margin-bottom: 45px;
+  padding: 8px 11px;
+
+  border-radius: 12px;
+
+  background: white;
+  color: var(--text);
+
+  box-shadow:
+    0 7px 20px rgba(0, 0, 0, 0.15);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.achievement-thomas.inspecting {
+  animation:
+    achievementThomasArrival
+    3s ease-in-out forwards;
+}
+
+.compact-achievement.under-inspection {
+  border-color: rgba(217, 72, 65, 0.35);
+
+  background: #fff4f3;
+
+  animation:
+    achievementInspectionPulse
+    800ms ease-in-out infinite;
+}
+
+
+@keyframes achievementThomasArrival {
+
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-135px);
+  }
+
+  75% {
+    transform: translateX(-135px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes achievementInspectionPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.985);
+  }
+}
+/* ========================================
+   GLOBAL HIDDEN STATE
+   KEEP THIS AT THE VERY BOTTOM
+   ======================================== */
+.hidden,
+.train-overlay.hidden,
+.letter-overlay.hidden,
+.thomas-event.hidden,
+.terminal-thomas.hidden,
+.thomas-delivery.hidden,
+#thomasReturn.hidden,
+.patch-thomas.hidden {
+  display: none;
+}

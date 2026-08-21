@@ -14,6 +14,12 @@ const ACHIEVEMENTS = [
     unlockedByDefault: true
   },
   {
+  id: "mail-reader",
+  icon: "✉️",
+  title: "You've Got Mail",
+  description: "Opened a message from the German girlfriend."
+  },
+  {
     id: "forbidden-button",
     icon: "⚠️",
     title: "Found the Forbidden Button",
@@ -57,6 +63,12 @@ const ACHIEVEMENTS = [
     description: "Clicked on the newest message because one read wasn't enough."
   },
   {
+  id: "mail-reader",
+  icon: "✉️",
+  title: "You've Got Mail",
+  description: "Opened a message from the German girlfriend."
+  },
+  {
   id: "nice",
   icon: "😏",
   title: "Uh lala.",
@@ -92,7 +104,106 @@ const ACHIEVEMENTS = [
   title: "Formal Complaint",
   description: "Submitted an official girlfriend complaint. Why you do this to me? :((((( what have I done."
 },
+{
+  id: "first-roll",
+  icon: "🎲",
+  title: "Let Fate Decide",
+  description: "Used the activity generator for the first time."
+},
+{
+  id: "first-date",
+  icon: "💙",
+  title: "No Take-Backsies",
+  description: "Accepted the first generated date without rerolling."
+},
+{
+  id: "reroll-addict",
+  icon: "🎰",
+  title: "Commitment Issues",
+  description: "Rerolled five times before accepting an activity."
+},
+{
+  id: "thomas-intervention",
+  icon: "🚂",
+  title: "Thomas Intervention",
+  description: "Experienced an unauthorised railway event."
+},
+{
+  id: "Interrupt",
+  icon: "🚆",
+  title: "Interrupt Thomas",
+  description:
+    "Had a transmission interrupted by Thomas. How rude :((("
+},
+{
+  id: "patch-notes-express",
+  icon: "🛠️",
+  title: "Unscheduled Maintenance",
+  description:
+    "Observed unauthorised railway activity. chuh chuh. Hope Thomas could molest ya."
+},
+{
+  id: "achievement-inspector",
+  icon: "🔎",
+  title: "Ticket Inspection",
+  description:
+    "Had your achievements audited by an entirely unqualified railway employee."
+},
+{
+  id: "date-planner",
+  icon: "❤️",
+  title: "Noted.",
+  description:
+    "Saved a date for future relationship operations."
+},
 
+{
+  id: "conversation-starter",
+  icon: "💬",
+  title: "We Need To Talk",
+  description:
+    "Used the conversation generator. Concerning wording, really."
+},
+
+{
+  id: "emotionally-competent",
+  icon: "🧠",
+  title: "Emotionally Competent",
+  description:
+    "Generated ten conversation questions. Communication has occurred."
+},
+{
+  id: "serial-daters",
+  icon: "💕",
+  title: "Serial Daters",
+  description:
+    "Completed five generated dates. Disturbingly functional behaviour."
+},
+{
+  id: "completionist",
+  icon: "🏆",
+  title: "Relationship Side Quests",
+  description:
+    "Completed ten generated dates."
+},
+{
+id:"date-completed",
+icon: "✅",
+title: "Completed first generated date",
+description: "Hell Yeah, we went on a date :))))"
+},
+{
+  id: "thomas-therapist",
+  icon: "🚂",
+  title: "Unlicensed Therapist",
+  description: "Thomas intercepted the Conversation Department."
+},
+{
+  id: "suspicious-rail-activity",
+  icon: "🚂",
+  title: "Suspicious Rail Activity",
+  description: "Encountered Thomas five times. This can no longer reasonably be considered a coincidence."
+}
 ];
 
 function getUnlockedAchievements() {
@@ -143,5 +254,15 @@ function incrementStatistic(key) {
 
   localStorage.setItem(key, String(newValue));
 
+  return newValue;
+}
+
+function setStatistic(key, value) {
+  localStorage.setItem(key, String(value));
+}
+
+function addStatistic(key, amount = 1) {
+  const newValue = getStatistic(key) + amount;
+  setStatistic(key, newValue);
   return newValue;
 }

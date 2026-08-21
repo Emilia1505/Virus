@@ -91,6 +91,22 @@
     <!-- profile-card ends here -->
 
   </main>
+  <!-- Thomas Achievement Inspector -->
+    <div
+      class="achievement-thomas hidden"
+      id="achievementThomas"
+      aria-hidden="true"
+    >
+      <div class="achievement-thomas-bubble">
+        Tickets, please. OR BOOOOOOOOOOOOOOOOOOOOOOOBS. 
+      </div>
+
+      <img
+        src="Images/thomas.jpg"
+        alt=""
+        class="achievement-thomas-image"
+      >
+    </div>
 
   <script src="achievements.js"></script>
 
@@ -137,8 +153,16 @@
 
     achievementProgressFill.style.width =
       `${percentage}%`;
-
-    if (unlockedTotal >= 14) {
+    if (unlockedTotal >= 30) {
+     profileLevel.textContent =
+    "Level 7 System Administrator";
+    } else if (unlockedTotal >= 24) {
+      profileLevel.textContent =
+      "Level 6 Completionist";
+    } else if (unlockedTotal >= 19) {
+      profileLevel.textContent =
+      "Level 5 Senior Investigator";
+    } else if (unlockedTotal >= 14) {
       profileLevel.textContent =
         "Level 4 Investigator";
     } else if (unlockedTotal >= 10) {
@@ -163,6 +187,8 @@
         `compact-achievement ${
           isUnlocked ? "unlocked" : "locked"
         }`;
+
+      item.dataset.achievementId = achievement.id;
 
       if (isUnlocked) {
         item.innerHTML = `
@@ -206,6 +232,118 @@
 
       achievementList.appendChild(item);
     });
+    /* ========================================
+   THOMAS ACHIEVEMENT INSPECTION
+   ======================================== */
+
+    const achievementThomas =
+      document.getElementById("achievementThomas");
+
+    const alreadyInspected =
+      isAchievementUnlocked("achievement-inspector");
+
+    /*
+    * More likely until she discovers it.
+    * Afterwards Thomas becomes considerably rarer.
+    */
+    const inspectionChance = 
+      alreadyInspected ? 0.03 : 0.12;
+
+    if (Math.random() < inspectionChance) {
+      setTimeout(() => {
+        runAchievementInspection();
+      }, 1800);
+    }
+
+    function runAchievementInspection() {
+
+      /* Only inspect achievements she has actually earned */
+      const unlockedCards = [
+        ...document.querySelectorAll(
+          ".compact-achievement.unlocked"
+        )
+      ].filter((card) =>
+        card.dataset.achievementId !==
+          "achievement-inspector"
+      );
+
+      if (unlockedCards.length === 0) {
+        return;
+      }
+
+      const inspectedCard =
+        unlockedCards[
+          Math.floor(Math.random() * unlockedCards.length)
+        ];
+
+      /*
+      * Save the original card so we can restore it.
+      */
+      const originalHTML =
+        inspectedCard.innerHTML;
+
+      inspectedCard.classList.add(
+        "under-inspection"
+      );
+
+      inspectedCard.innerHTML = `
+        <div class="compact-achievement-icon">
+          🚂
+        </div>
+
+        <div class="compact-achievement-text">
+          <h3>Achievement Under Review</h3>
+
+          <p>
+            Thomas is currently verifying this achievement.
+          </p>
+        </div>
+
+        <span class="achievement-state">
+          ?
+        </span>
+      `;
+
+      achievementThomas.classList.remove(
+        "hidden"
+      );
+
+      /*
+      * Give her a second to realise something
+      * has gone horribly wrong.
+      */
+      setTimeout(() => {
+        achievementThomas.classList.add(
+          "inspecting"
+        );
+      }, 1600);
+
+      /*
+      * Inspection complete.
+      */
+      setTimeout(() => {
+
+        achievementThomas.classList.remove(
+          "inspecting"
+        );
+
+        achievementThomas.classList.add(
+          "hidden"
+        );
+
+        inspectedCard.innerHTML =
+          originalHTML;
+
+        inspectedCard.classList.remove(
+          "under-inspection"
+        );
+
+        unlockAchievement(
+          "achievement-inspector"
+        );
+
+      }, 3800);
+    }
   </script>
 
 </body>
